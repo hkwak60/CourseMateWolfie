@@ -1,13 +1,21 @@
+/* _____________________SIGNUP, LOGIN_____________________________________________________ */
+:root {
+  --standardBackgroundColor: #b5b5b5;
+  --lightBackgroundColor: #eeeeee;
+  --activeColor: #0e499c;
+  --buttonColor: #9ecaffe2;
+  --deleteButtonColor: #ff7c7c;
+}
+
 * {
-  background-color: #ececec;
+  background-color: var(--lightBackgroundColor);
+  font-family: OCR A Std, monospace;
 }
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  font-family: OCR A Std, monospace;
 }
 
 .center-align {
@@ -32,7 +40,7 @@ input[type='password'] {
   padding: 5px;
   margin-top: 5px;
   border-radius: 5px;
-  background-color: rgb(199, 199, 199);
+  background-color: var(--standardBackgroundColor);
 }
 
 input[type='submit'],
@@ -42,13 +50,9 @@ input[type='button'] {
   font-size: 1em;
   cursor: pointer;
   margin: 20px 0;
-  background-color: #ddd;
+  background-color: var(--buttonColor);
   border: none;
   border-radius: 5px;
-}
-
-input[type='button'] {
-  background-color: #bbb;
 }
 
 form > div:last-child {
@@ -59,4 +63,239 @@ form > div:last-child {
 
 form > div:last-child > div {
   margin-bottom: 10px;
+}
+/* ____________________NAVBAR_____________________________________________________________ */
+
+.nav {
+  background-color: var(--standardBackgroundColor);
+  max-width: 100%;
+  height: 80px;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+}
+.nav ul {
+  list-style: none;
+  width: 370px;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav ul li {
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.nav a {
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav li.active {
+  text-decoration: underline;
+  color: var(--activeColor);
+}
+
+.nav li:hover {
+  text-decoration: none;
+  color: var(--activeColor);
+}
+/* ______________________________GRADE EVAL __________________________________*/
+
+.rwd-table {
+  width: 80%;
+  max-width: 800px;
+  background-color: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.rwd-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #f5f9fc;
+}
+
+.rwd-table tr:nth-child(odd):not(:first-child) {
+  background-color: #ebf3f9;
+}
+
+.rwd-table th {
+  display: none;
+}
+
+.rwd-table td {
+  display: block;
+}
+
+.rwd-table td:first-child {
+  margin-top: 0.5em;
+}
+
+.rwd-table td:last-child {
+  margin-bottom: 0.5em;
+}
+
+.rwd-table td:before {
+  content: attr(data-th) ': ';
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+  color: #000;
+}
+
+.rwd-table th,
+.rwd-table td {
+  text-align: left;
+  padding: 0.5em 1em;
+}
+
+.grade {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 601px) {
+  .rwd-table tr:nth-child(2) {
+    border-top: none;
+  }
+}
+@media screen and (min-width: 600px) {
+  .rwd-table tr:hover:not(:first-child) {
+    background-color: #d8e7f3;
+  }
+  .rwd-table td:before {
+    display: none;
+  }
+  .rwd-table th,
+  .rwd-table td {
+    display: table-cell;
+    padding: 0.25em 0.5em;
+  }
+  .rwd-table th:first-child,
+  .rwd-table td:first-child {
+    padding-left: 0;
+  }
+  .rwd-table th:last-child,
+  .rwd-table td:last-child {
+    padding-right: 0;
+  }
+  .rwd-table th,
+  .rwd-table td {
+    padding: 1em !important;
+  }
+}
+
+/* ______________________________EDIT COURSE__________________________________ */
+
+.course-details {
+  width: 80%;
+  max-width: 800px;
+  background-color: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.add-item-button {
+  position: absolute;
+  top: 20px;
+  background-color: var(--buttonColor);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.navbutton {
+  background-color: var(--buttonColor);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none; /* Ensure text is not underlined */
+  display: inline-block; /* Make it behave like a button */
+}
+
+li {
+  list-style-type: none;
+}
+
+.back-button {
+  left: 20px;
+}
+
+.add-item-button {
+  right: 20px;
+}
+
+h1 {
+  font-size: 1.2em;
+  margin: 20px 0 10px;
+}
+
+.delete-course-button,
+.save-button {
+  background-color: var(--buttonColor);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.delete-course-button {
+  background-color: var(--deleteButtonColor);
+}
+
+.save-button {
+  float: right;
+}
+.section {
+  margin: 20px 0;
+  background-color: #add8e6;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+.percentage {
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #dcdcdc;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+/* .score {
+  background-color: #add8e6;
+  padding: 5px 10px;
+  border-radius: 5px;
+} */
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }

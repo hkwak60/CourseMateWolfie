@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
 export default function Login() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <form>
@@ -17,7 +15,7 @@ export default function Login() {
         </div>
         <input type="submit" value={'login'}></input>
         <div>
-          <div>No Account?</div>
+          <span>No Account?</span>
           <input type="button" value={'sign in'}></input>
         </div>
       </form>
