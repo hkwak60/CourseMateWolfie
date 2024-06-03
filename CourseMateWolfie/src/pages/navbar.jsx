@@ -1,4 +1,4 @@
-import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -13,14 +13,14 @@ export default function Navbar() {
     </nav>
   );
 }
-
+//dddddd
 function ActiveLink({ to, children, ...props }) {
   //Special type to treat navigation
   const resolvedPath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
-    <li className={isActive ? 'active' : ''}>
+    <li className={isActive ? "active" : ""}>
       <Link to={to} {...props}>
         {children}
       </Link>
