@@ -13,7 +13,7 @@ export default function Navbar() {
     </nav>
   );
 }
-//dddddd
+
 function ActiveLink({ to, children, ...props }) {
   //Special type to treat navigation
   const resolvedPath = useResolvedPath(to);
