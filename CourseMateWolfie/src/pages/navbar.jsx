@@ -5,6 +5,8 @@ export default function Navbar() {
     <nav className="nav">
       <ul>
         <ActiveLink to="/gradeEval">Grade Evaluation</ActiveLink>
+        <ActiveLink to="/todo">Todo</ActiveLink>
+        <ActiveLink to="/editTodo">EditTodo</ActiveLink>
         <ActiveLink to="/signup">Sign Up</ActiveLink>
         <ActiveLink to="/login">Log In</ActiveLink>
         {/* <ActiveLink to="/edit_q">Edit Questions</ActiveLink>
