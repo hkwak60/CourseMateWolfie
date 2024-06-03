@@ -1,5 +1,5 @@
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
-
+import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+// HOjun
 export default function Navbar() {
   return (
     <nav className="nav">
@@ -20,7 +20,7 @@ function ActiveLink({ to, children, ...props }) {
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
-    <li className={isActive ? "active" : ""}>
+    <li className={isActive ? 'active' : ''}>
       <Link to={to} {...props}>
         {children}
       </Link>
