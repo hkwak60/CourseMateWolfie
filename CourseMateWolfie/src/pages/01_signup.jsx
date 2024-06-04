@@ -1,14 +1,14 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function SignUp() {
   const [userData, setUserData] = useState();
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/loadAccount")
+      .get('http://localhost:8000/loadAccount')
       .then((res) => {
         const newdata = res.data.map((data) => ({
           user_name: data.user_name,
@@ -31,9 +31,9 @@ export default function SignUp() {
   const handleSave = (e) => {
     e.preventDefault();
     if (name.length === 0) {
-      alert("Enter an user name!");
+      alert('Enter an user name!');
     } else if (password.length < 4) {
-      alert("Use password of at least 4 characters!");
+      alert('Use password of at least 4 characters!');
     } else {
       let idx = -1;
       userData.forEach((data, i) => {
@@ -41,27 +41,30 @@ export default function SignUp() {
       });
 
       if (idx != -1) {
-        alert("ID already exists!");
+        alert('ID already exists!');
       } else {
         const idpw = {
           user_name: name,
           user_password: password,
         };
         axios
-          .post("http://localhost:8000/postAccount", idpw, {})
+          .post('http://localhost:8000/postAccount', idpw, {})
           .then((response) => {})
           .catch((error) => {
-            console.error("Error:", error);
+            console.error('Error:', error);
           });
-        alert("New account created!");
-        window.location.href = "/login";
+        alert('New account created!');
+        window.location.href = '/login';
       }
     }
   };
 
   return (
     <div className="flexible_body">
-      <form className="container">
+      <a className="navbutton" href="http://localhost:5173/login">
+        ←
+      </a>
+      <form className="margin container">
         <h2 className="center-align">Sign up</h2>
         <div>
           <div>ID: </div>
@@ -80,7 +83,7 @@ export default function SignUp() {
           <input
             className="button"
             type="submit"
-            value={"Create"}
+            value={'Create'}
             onClick={handleSave}
           ></input>
         </div>

@@ -1,6 +1,7 @@
 :root {
   --standardBackgroundColor: #b5b5b5;
   --lightBackgroundColor: #eeeeee;
+  --tableColor: #d2d2d2;
   --activeColor: #4b51af;
   --lightactiveColor: #8e92c9;
   --buttonColor: #b0b2d3;
@@ -17,8 +18,8 @@
 * {
   background-color: var(--lightBackgroundColor);
   font-family: OCR A Std, monospace;
-  margin: 0px;
-  padding: 0px;
+  /* margin: 0px;
+  padding: 0px; */
 }
 
 body > div > div {
@@ -62,6 +63,10 @@ input[value='Sign up'] {
   width: 310px;
 }
 
+.margin * {
+  margin: 5px 5px 0 0;
+}
+
 /* ____________________NAVBAR_____________________________________________________________ */
 
 .nav {
@@ -103,40 +108,71 @@ input[value='Sign up'] {
 }
 /* ______________________________Grade Eval________________________________________ */
 .grade_display {
-  background-color: var(--standardBackgroundColor);
+  background-color: var(--tableColor);
+  justify-self: center;
+  padding: 20px 20px 70px 20px;
+  border-radius: 5px;
+  border-spacing: 0px;
 }
 
 .grade_header {
   height: 80px;
-  width: 100%;
-  background-color: inherit;
-  border-bottom: solid;
+  width: 800px;
+  font-size: 20px;
 }
-.grade_header * {
-  background-color: inherit;
-}
-
-table * {
-  border: 3px solid purple;
-  border-collapse: collapse;
+.grade_display * {
+  background-color: var(--tableColor);
 }
 
-thead {
-  width: 100%;
+.course_contents {
+  background-color: var(--lightactiveColor);
+}
+.course_contents * {
+  padding: 0;
+}
+
+th {
+  border-bottom: 2px solid black;
+}
+
+td > .course_details {
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 100px;
+  margin-top: 30px;
+  padding-left: 5px;
+  background-color: var(--lightactiveColor);
 }
-thead th:nth-child(1) {
-  /* width: 50%; */
-  margin: 300px;
+td > .course_name {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  margin-top: 30px;
+  padding-left: 10px;
+  background-color: var(--lightactiveColor);
 }
 
-thead th:nth-child(2) {
-  /* width: 80%; */
+tbody {
+  font-weight: 900;
+  font-size: 20px;
 }
 
-thead th:nth-child(3) {
-  /* width: 80%; */
+.course_name {
+  width: 400px;
+  text-align: left;
+  /* border-bottom: 2px solid black; */
+}
+tbody .course_name {
+  font-size: 30px;
+}
+.course_score {
+  width: 200px;
+  text-align: center;
+}
+.course_letter {
+  width: 200px;
+  text-align: center;
 }
 
 /* ____________________Reusable_____________________________________________________________ */
@@ -151,9 +187,6 @@ thead th:nth-child(3) {
   justify-content: center;
   margin-top: 20px;
 }
-/* .container * {
-  margin: 5px 5px 0 0;
-} */
 
 .align_right {
   display: flex;
@@ -175,6 +208,20 @@ thead th:nth-child(3) {
 .horizontal_line {
   width: 99%;
   border: 1.5px solid black;
+}
+
+.navbutton {
+  /*buttons*/
+  width: 200px;
+  height: 100px;
+  margin-top: 20px;
+  padding: 5px;
+  background-color: var(--buttonColor);
+  border-radius: 10px;
+}
+
+li {
+  list-style: none;
 }
 
 /* main {

@@ -24,31 +24,41 @@ function ActiveLink({ to, children, ...props }) {
 
 export default function CourseTable() {
   return (
-    <main className="flexible_body">
-      <table className="grade_display container">
-        <thead className="grade_header">
-          <tr>
-            <th scope="col">Course Name</th>
-            <th scope="col">Scores</th>
-            <th scope="col">Expected Grade</th>
+    <main className="container">
+      <table className="grade_display">
+        <thead className="line">
+          <tr className="grade_header">
+            <th className="course_name" scope="col">
+              Course Name
+            </th>
+            <th className="course_score" scope="col">
+              Scores
+            </th>
+            <th className="course_letter" scope="col">
+              Expected Grade
+            </th>
           </tr>
         </thead>
         {/* <div className="horizontal_line"></div> */}
         <tbody>
           {courses.map((course, index) => (
-            <tr key={index}>
-              <td scope="row" className="">
-                {course.name}
+            <tr className="course_contents" key={index}>
+              <td scope="row" className="course_name ">
+                <div className="course_name">{course.name}</div>
               </td>
-              <td className="">{course.score}</td>
-              <td className="">{course.grade}</td>
+              <td className="course_score">
+                <div className="course_details">{course.score}</div>
+              </td>
+              <td className="course_letter">
+                <div className="course_details">{course.grade}</div>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <ActiveLink className="navbutton" to="/edit_gradeEval">
+      <a className="navbutton" href="http://localhost:5173/edit_gradeEval">
         Add Course
-      </ActiveLink>
+      </a>
     </main>
   );
 }
