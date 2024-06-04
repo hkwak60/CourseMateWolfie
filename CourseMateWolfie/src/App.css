@@ -2,6 +2,7 @@
   --standardBackgroundColor: #b5b5b5;
   --lightBackgroundColor: #eeeeee;
   --activeColor: #4b51af;
+  --lightactiveColor: #8e92c9;
   --buttonColor: #b0b2d3;
   --deleteButtonColor: #ff7c7c;
 
@@ -16,6 +17,8 @@
 * {
   background-color: var(--lightBackgroundColor);
   font-family: OCR A Std, monospace;
+  margin: 0px;
+  padding: 0px;
 }
 
 body > div > div {
@@ -28,8 +31,9 @@ body > div > div > * {
 }
 
 /* _____________________SIGNUP, LOGIN_____________________________________________________ */
-input[type="text"],
-input[type="password"] {
+.id,
+.password {
+  /*input box*/
   width: 300px;
   height: 40px;
   font-size: 1em;
@@ -39,8 +43,10 @@ input[type="password"] {
   background-color: var(--standardBackgroundColor);
 }
 
-input[type="submit"],
-input[type="button"] {
+input[value='Log in'],
+input[value='Create'],
+input[value='Sign up'] {
+  /*buttons*/
   width: 100px;
   height: 40px;
   font-size: 1em;
@@ -51,44 +57,40 @@ input[type="button"] {
   border-radius: 5px;
 }
 
+.auth_button {
+  /*로그인 버튼 위치*/
+  width: 52%;
+}
+
 /* ____________________NAVBAR_____________________________________________________________ */
 
 .nav {
   background-color: var(--standardBackgroundColor);
-  max-width: 100%;
+  max-width: 800px;
   height: 80px;
-  padding: 0px 20px;
+  font-weight: bold;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .nav ul {
   list-style: none;
-  width: 370px;
+  width: 100%;
   display: flex;
-  gap: 0.5rem;
-}
-
-.nav ul li {
-  margin-left: 20px;
-  text-decoration: none;
+  justify-content: space-around;
 }
 
 .nav a {
   text-decoration: none;
   color: inherit;
-  height: 100%;
-  display: flex;
-  align-items: center;
 }
 
 .nav li.active {
-  text-decoration: underline;
   color: var(--activeColor);
 }
 
 .nav li:hover {
-  text-decoration: none;
-  color: var(--activeColor);
+  color: var(--lightactiveColor);
 }
 
 /* ____________________Reusable_____________________________________________________________ */
@@ -117,4 +119,10 @@ input[type="button"] {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.button:hover {
+  color: var(--lightBackgroundColor);
+}
+.button:active {
+  background-color: var(--activeColor);
 }

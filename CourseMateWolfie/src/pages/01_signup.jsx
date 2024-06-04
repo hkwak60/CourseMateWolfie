@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function SignUp() {
   return (
@@ -7,14 +7,18 @@ export default function SignUp() {
         <h2 className="center-align">Sign up</h2>
         <div>
           <div>ID: </div>
-          <input type="text"></input>
+          <input className="id" type="text"></input>
         </div>
         <div>
           <div>Password: </div>
-          <input type="password" placeholder="minimum 4 characters"></input>
+          <input
+            className="password"
+            type="password"
+            placeholder="minimum 4 characters"
+          ></input>
         </div>
-        <div className="align_right" style={{ width: "55%" }}>
-          <input type="submit" value={"Create"}></input>
+        <div className="align_right auth_button">
+          <input className="button" type="submit" value={'Create'}></input>
         </div>
       </form>
     </div>
