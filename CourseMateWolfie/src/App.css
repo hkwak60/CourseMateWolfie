@@ -47,6 +47,7 @@ body > div > div > * {
 input[value='Log in'],
 input[value='Create'],
 input[value='Sign up'],
+input[value='Save'],
 .done-button {
   /*buttons*/
   width: 100px;
@@ -169,12 +170,9 @@ tbody,
 tbody .course_name {
   font-size: 30px;
 }
-.course_score {
-  width: 200px;
-  text-align: center;
-}
+.course_score,
 .course_letter {
-  width: 200px;
+  width: 180px;
   text-align: center;
 }
 
@@ -219,7 +217,8 @@ tbody .course_name {
 .task-display {
   margin: 10px;
 }
-.background_box > div {
+.background_box > div,
+.background_box > h4 {
   background-color: inherit;
 }
 
@@ -231,6 +230,67 @@ tbody .course_name {
   accent-color: var(--actionblue);
 }
 
+/* ______________________________CourseInfo______________________________ */
+.course_name1 {
+  width: 200px;
+  text-align: left;
+  /* border-bottom: 2px solid black; */
+}
+tbody .course_name1 {
+  font-size: 30px;
+}
+.course_prof,
+.course_room {
+  width: 80px;
+  text-align: center;
+}
+.course_memo {
+  width: 200px;
+  text-align: center;
+}
+
+/* _______________________________Edit Course Info________________________________ */
+.detail_box {
+  /* margin-top: 90px; */
+  padding: 30px;
+}
+
+.background_box > h4 {
+  margin-bottom: 0px;
+}
+
+.inputbox {
+  font-weight: 900;
+  font-size: 20px;
+  width: 200px;
+  height: 40px;
+  border-radius: 13px;
+  padding-left: 5px;
+  background-color: var(--buttonColor);
+  color: #fcfcfc;
+  border: 0.5 solid grey;
+}
+.inputbox:disabled {
+  color: #5a5a5a;
+}
+
+.roomNo {
+  width: 100px;
+}
+
+.memobox {
+  border: 2px solid black;
+  font-weight: 300;
+  color: #fcfcfc;
+  font-size: 15px;
+  width: 700px;
+  height: 300px;
+  border-radius: 13px;
+  padding-left: 5px;
+  background-color: var(--buttonColor);
+  text-align: left;
+  padding: 10px;
+}
 /* ____________________Reusable_____________________________________________________________ */
 .flexible_body {
   max-width: 800px;
@@ -284,8 +344,26 @@ tbody .course_name {
   text-decoration: none;
 }
 
+.returnbutton {
+  /*buttons*/
+  width: 80px;
+  height: 20px;
+  padding: 5px;
+  background-color: var(--buttonColor);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  text-decoration: none;
+  padding-bottom: 10px;
+}
+
 .margin_left {
   margin-left: 20px;
+}
+.margin_top {
+  margin-top: 10px;
 }
 
 li {
@@ -294,6 +372,10 @@ li {
 
 .background_box {
   background-color: var(--tableColor);
+}
+
+.edit_box {
+  height: 800px;
 }
 
 .big-size {
