@@ -13,6 +13,7 @@ export default function SignUp() {
     setPassword(onChangeValue.target.value);
   };
   const handleSave = (e) => {
+    e.preventDefault();
     if (password.length < 4) {
       alert("Use password of at least 4 characters!");
     } else {
@@ -20,14 +21,18 @@ export default function SignUp() {
         user_name: name,
         user_password: password,
       };
+      console.log("check1");
       axios
-        .post("http://localhost:8000/postAccount", formData, {})
-        .then((response) => {})
+        .post("http://localhost:8000/postAccount", idpw, {})
+        .then((response) => {
+          console.log("New account created!");
+        })
         .catch((error) => {
           console.error("Error:", error);
         });
+      console.log("check2");
       alert("New account created!");
-      window.location.href = "/login";
+      // window.location.href = "/login";
     }
   };
 
