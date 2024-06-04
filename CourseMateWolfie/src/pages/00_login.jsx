@@ -39,6 +39,10 @@ export default function Login() {
     } else alert("Login failed!");
   };
 
+  const handleSignup = (e) => {
+    window.location.href = "/signup";
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/loadAccount")
@@ -82,7 +86,12 @@ export default function Login() {
       <div style={{ height: "30px" }}></div>
       <div className="align_center">
         <span style={{ marginRight: "10px" }}>No Account?</span>
-        <input className="button" type="button" value={"Sign up"}></input>
+        <input
+          className="button"
+          type="button"
+          value={"Sign up"}
+          onClick={handleSignup}
+        ></input>
       </div>
     </div>
   );

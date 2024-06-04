@@ -6,7 +6,11 @@ export default function ShowNavbar({ children }) {
   const [showNav, setShowNav] = useState(false);
 
   useEffect(() => {
-    if (location.pathname == "/" || location.pathname == "/login")
+    if (
+      location.pathname == "/" ||
+      location.pathname == "/login" ||
+      location.pathname == "/signup"
+    )
       setShowNav(false);
     else setShowNav(true);
   }, [location]);
