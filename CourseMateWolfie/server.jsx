@@ -5,13 +5,14 @@ const cors = require("cors");
 const port = process.env.port || 8000;
 
 const app = express();
+app.use(bodyparser.json());
 app.use(cors());
 
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "chlgkstmd1",
-  database: "db",
+  database: "project",
 });
 
 app.get("/", (req, res) => {
@@ -22,8 +23,22 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use(bodyparser.json());
+app.post("/postAccount", (req, res) => {
+  const infos = req.body;
+  const sqlQuery = "INSERT INTO users (user_name, user_password) VALUES (?)";
+  let values = [infos.user_name, infos.user_password];
 
+  db.query(sqlQuery, [values], (err, result) => {
+    if (err) {
+      console.error("Error inserting account: ", err);
+      res.status(500).send("Error inserting account");
+    } else {
+      console.log("Account inserted successfully");
+      res.status(200).send("Account inserted successfully");
+    }
+  });
+});
+/*
 app.post("/postData", (req, res) => {
   db.query("DELETE FROM question;");
   const questions = req.body;
@@ -113,3 +128,4 @@ app.get("/loadProfile", (req, res) => {
 app.listen(port, () => {
   console.log(`running on port ${port}`);
 });
+*/
