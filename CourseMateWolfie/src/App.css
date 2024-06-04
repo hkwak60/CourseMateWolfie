@@ -59,16 +59,17 @@ input[value='Sign up'] {
 
 .auth_button {
   /*로그인 버튼 위치*/
-  width: 52%;
+  width: 310px;
 }
 
 /* ____________________NAVBAR_____________________________________________________________ */
 
 .nav {
-  background-color: var(--standardBackgroundColor);
+  background-color: var(--lightBackgroundColor);
   max-width: 800px;
   height: 80px;
   font-weight: bold;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -100,10 +101,47 @@ input[value='Sign up'] {
 .username {
   margin-right: 10px;
 }
+/* ______________________________Grade Eval________________________________________ */
+.grade_display {
+  background-color: var(--standardBackgroundColor);
+}
+
+.grade_header {
+  height: 80px;
+  width: 100%;
+  background-color: inherit;
+  border-bottom: solid;
+}
+.grade_header * {
+  background-color: inherit;
+}
+
+table * {
+  border: 3px solid purple;
+  border-collapse: collapse;
+}
+
+thead {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+thead th:nth-child(1) {
+  /* width: 50%; */
+  margin: 300px;
+}
+
+thead th:nth-child(2) {
+  /* width: 80%; */
+}
+
+thead th:nth-child(3) {
+  /* width: 80%; */
+}
 
 /* ____________________Reusable_____________________________________________________________ */
 .flexible_body {
-  max-width: 600px;
+  max-width: 800px;
 }
 
 .container {
@@ -111,12 +149,11 @@ input[value='Sign up'] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   margin-top: 20px;
 }
-.container * {
+/* .container * {
   margin: 5px 5px 0 0;
-}
+} */
 
 .align_right {
   display: flex;
@@ -134,3 +171,12 @@ input[value='Sign up'] {
 .button:active {
   background-color: var(--activeColor);
 }
+
+.horizontal_line {
+  width: 99%;
+  border: 1.5px solid black;
+}
+
+/* main {
+  background-color: var(--standardBackgroundColor);
+} */

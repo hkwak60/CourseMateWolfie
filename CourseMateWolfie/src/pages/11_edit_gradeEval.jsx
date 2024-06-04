@@ -43,7 +43,7 @@ export default function CourseDetails() {
   }
 
   return (
-    <div className="course-details">
+    <main className="course-details">
       {/* <button className="back-button">←</button> */}
       <ActiveLink className="navbutton" to="/gradeEval">
         ←
@@ -76,6 +76,6 @@ export default function CourseDetails() {
       />
       <button className="delete-course-button">Delete this course</button>
       <button className="save-button">Save</button>
-    </div>
+    </main>
   );
 }

@@ -1,7 +1,7 @@
-const express = require("express");
-const mysql = require("mysql2");
-const bodyparser = require("body-parser");
-const cors = require("cors");
+const express = require('express');
+const mysql = require('mysql2');
+const bodyparser = require('body-parser');
+const cors = require('cors');
 const port = process.env.port || 8000;
 
 const app = express();
@@ -9,10 +9,10 @@ app.use(bodyparser.json());
 app.use(cors());
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "chlgkstmd1",
-  database: "project",
+  host: 'localhost',
+  user: 'root',
+  password: 'chlgkstmd1',
+  database: 'project',
 });
 
 app.get("/", (req, res) => {
@@ -130,7 +130,7 @@ app.get("/loadProfile", (req, res) => {
   });
 });
 
+*/
 app.listen(port, () => {
   console.log(`running on port ${port}`);
 });
-*/

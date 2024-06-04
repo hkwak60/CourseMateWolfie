@@ -24,21 +24,24 @@ function ActiveLink({ to, children, ...props }) {
 
 export default function CourseTable() {
   return (
-    <main>
-      <table className="rwd-table">
-        <thead>
+    <main className="flexible_body">
+      <table className="grade_display container">
+        <thead className="grade_header">
           <tr>
-            <th>Course Name</th>
-            <th>Scores</th>
-            <th>Expected Grade</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Scores</th>
+            <th scope="col">Expected Grade</th>
           </tr>
         </thead>
+        {/* <div className="horizontal_line"></div> */}
         <tbody>
           {courses.map((course, index) => (
             <tr key={index}>
-              <td className="course">{course.name}</td>
-              <td className="score">{course.score}</td>
-              <td className="grade">{course.grade}</td>
+              <td scope="row" className="">
+                {course.name}
+              </td>
+              <td className="">{course.score}</td>
+              <td className="">{course.grade}</td>
             </tr>
           ))}
         </tbody>
