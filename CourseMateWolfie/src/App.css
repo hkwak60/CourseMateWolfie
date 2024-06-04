@@ -46,7 +46,8 @@ body > div > div > * {
 
 input[value='Log in'],
 input[value='Create'],
-input[value='Sign up'] {
+input[value='Sign up'],
+.done-button {
   /*buttons*/
   width: 100px;
   height: 40px;
@@ -54,7 +55,7 @@ input[value='Sign up'] {
   cursor: pointer;
   margin: 20px 0;
   background-color: var(--buttonColor);
-  border: none;
+  border: 0.5px solid black;
   border-radius: 5px;
 }
 
@@ -84,6 +85,7 @@ input[value='Sign up'] {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  padding-inline-start: 0px;
 }
 
 .nav a {
@@ -153,7 +155,8 @@ td > .course_name {
   background-color: var(--lightactiveColor);
 }
 
-tbody {
+tbody,
+.header {
   font-weight: 900;
   font-size: 20px;
 }
@@ -175,11 +178,68 @@ tbody .course_name {
   text-align: center;
 }
 
+/* ______________________________Todo___________________________ */
+
+.header {
+  font-size: 20px;
+  padding-inline-start: 0px;
+  list-style-type: none;
+  background-color: var(--tableColor);
+  padding: 10px;
+}
+
+.header > li,
+.inline-block {
+  display: inline-block;
+  background-color: inherit;
+}
+.task * {
+  background-color: inherit;
+  display: inline-block;
+  font-weight: 900;
+  font-size: 20px;
+}
+.task {
+  margin-top: 20px;
+  background-color: var(--lightactiveColor);
+}
+.course {
+  width: 200px;
+}
+.task-name {
+  width: 300px;
+}
+.posted-date {
+  width: 130px;
+}
+.due-date {
+  width: 100px;
+}
+
+.task-display {
+  margin: 10px;
+}
+.background_box > div {
+  background-color: inherit;
+}
+
+[type='radio'] {
+  border: max(2px, 0.1em) solid gray;
+  border-radius: 50%;
+  width: 2.25em;
+  height: 2.25em;
+  accent-color: var(--actionblue);
+}
+
 /* ____________________Reusable_____________________________________________________________ */
 .flexible_body {
   max-width: 800px;
 }
 
+.align {
+  display: flex;
+  align-items: center;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -212,18 +272,33 @@ tbody .course_name {
 
 .navbutton {
   /*buttons*/
-  width: 200px;
-  height: 100px;
-  margin-top: 20px;
+  width: 100px;
+  height: 40px;
   padding: 5px;
   background-color: var(--buttonColor);
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  text-decoration: none;
+}
+
+.margin_left {
+  margin-left: 20px;
 }
 
 li {
   list-style: none;
 }
 
-/* main {
-  background-color: var(--standardBackgroundColor);
-} */
+.background_box {
+  background-color: var(--tableColor);
+}
+
+.big-size {
+  font-size: 30px;
+}
+.biggest-size {
+  font-size: 50px;
+}

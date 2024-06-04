@@ -18,37 +18,34 @@ export default function TodoDetails() {
   const [memo, setMemo] = useState('Write a team project proposal');
 
   return (
-    <div className="app">
-      <button className="back-button">←</button>
-      <div className="form">
-        <div className="form-group">
+    <div>
+      <button className="navbutton biggest-size">←</button>
+      <div>
+        <div>
           <label>Course Name</label>
           <input
             type="text"
             value={courseName}
             onChange={(e) => setCourseName(e.target.value)}
-            className="input-field course-name"
           />
         </div>
-        <div className="form-group">
+        <div>
           <label>Task</label>
           <input
             type="text"
             value={taskName}
             onChange={(e) => setTaskName(e.target.value)}
-            className="input-field task-name"
           />
         </div>
-        <div className="form-group">
+        <div>
           <label>Posted Date</label>
-          <div className="date-time-group">
+          <div>
             <input
               type="text"
               value={postedDate.mm}
               onChange={(e) =>
                 setPostedDate({ ...postedDate, mm: e.target.value })
               }
-              className="input-field date-field"
               placeholder="MM"
             />
             <input
@@ -57,7 +54,6 @@ export default function TodoDetails() {
               onChange={(e) =>
                 setPostedDate({ ...postedDate, dd: e.target.value })
               }
-              className="input-field date-field"
               placeholder="DD"
             />
             <input
