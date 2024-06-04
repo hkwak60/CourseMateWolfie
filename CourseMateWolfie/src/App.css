@@ -1,39 +1,35 @@
-/* _____________________SIGNUP, LOGIN_____________________________________________________ */
 :root {
   --standardBackgroundColor: #b5b5b5;
   --lightBackgroundColor: #eeeeee;
-  --activeColor: #0e499c;
-  --buttonColor: #9ecaffe2;
+  --activeColor: #4b51af;
+  --buttonColor: #b0b2d3;
   --deleteButtonColor: #ff7c7c;
+
+  --div1grey: #f5f5f5;
+  --div2grey: #d8d8d8;
+  --actionblue: #4b51af;
+  --box1blue: #b0b2d3;
+  --box2blue: #8f98cf;
+  --deletered: #994b64;
 }
 
 * {
   background-color: var(--lightBackgroundColor);
   font-family: OCR A Std, monospace;
 }
-form {
+
+body > div > div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+}
+body > div > div > * {
+  width: 95%;
 }
 
-.center-align {
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-form > div {
-  margin: 10px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-input[type='text'],
-input[type='password'] {
+/* _____________________SIGNUP, LOGIN_____________________________________________________ */
+input[type="text"],
+input[type="password"] {
   width: 300px;
   height: 40px;
   font-size: 1em;
@@ -43,8 +39,8 @@ input[type='password'] {
   background-color: var(--standardBackgroundColor);
 }
 
-input[type='submit'],
-input[type='button'] {
+input[type="submit"],
+input[type="button"] {
   width: 100px;
   height: 40px;
   font-size: 1em;
@@ -55,15 +51,6 @@ input[type='button'] {
   border-radius: 5px;
 }
 
-form > div:last-child {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-form > div:last-child > div {
-  margin-bottom: 10px;
-}
 /* ____________________NAVBAR_____________________________________________________________ */
 
 .nav {
@@ -103,348 +90,31 @@ form > div:last-child > div {
   text-decoration: none;
   color: var(--activeColor);
 }
-/* ______________________________GRADE EVAL __________________________________*/
 
-.rwd-table {
-  width: 80%;
-  max-width: 800px;
-  background-color: #e0e0e0;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative;
+/* ____________________Reusable_____________________________________________________________ */
+.flexible_body {
+  max-width: 600px;
 }
 
-.rwd-table tr {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #f5f9fc;
-}
-
-.rwd-table tr:nth-child(odd):not(:first-child) {
-  background-color: #ebf3f9;
-}
-
-.rwd-table th {
-  display: none;
-}
-
-.rwd-table td {
-  display: block;
-}
-
-.rwd-table td:first-child {
-  margin-top: 0.5em;
-}
-
-.rwd-table td:last-child {
-  margin-bottom: 0.5em;
-}
-
-.rwd-table td:before {
-  content: attr(data-th) ': ';
-  font-weight: bold;
-  width: 120px;
-  display: inline-block;
-  color: #000;
-}
-
-.rwd-table th,
-.rwd-table td {
-  text-align: left;
-  padding: 0.5em 1em;
-}
-
-.grade {
-  display: flex;
-  justify-content: center;
-}
-
-@media screen and (max-width: 601px) {
-  .rwd-table tr:nth-child(2) {
-    border-top: none;
-  }
-}
-@media screen and (min-width: 600px) {
-  .rwd-table tr:hover:not(:first-child) {
-    background-color: #d8e7f3;
-  }
-  .rwd-table td:before {
-    display: none;
-  }
-  .rwd-table th,
-  .rwd-table td {
-    display: table-cell;
-    padding: 0.25em 0.5em;
-  }
-  .rwd-table th:first-child,
-  .rwd-table td:first-child {
-    padding-left: 0;
-  }
-  .rwd-table th:last-child,
-  .rwd-table td:last-child {
-    padding-right: 0;
-  }
-  .rwd-table th,
-  .rwd-table td {
-    padding: 1em !important;
-  }
-}
-
-/* ______________________________EDIT COURSE__________________________________ */
-
-.course-details {
-  width: 80%;
-  max-width: 800px;
-  background-color: #e0e0e0;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-.add-item-button {
-  position: absolute;
-  top: 20px;
-  background-color: var(--buttonColor);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.navbutton {
-  background-color: var(--buttonColor);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-  text-decoration: none; /* Ensure text is not underlined */
-  display: inline-block; /* Make it behave like a button */
-}
-
-li {
-  list-style-type: none;
-}
-
-.back-button {
-  left: 20px;
-}
-
-.add-item-button {
-  right: 20px;
-}
-
-h1 {
-  font-size: 1.2em;
-  margin: 20px 0 10px;
-}
-
-.delete-course-button,
-.save-button {
-  background-color: var(--buttonColor);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.delete-course-button {
-  background-color: var(--deleteButtonColor);
-}
-
-.save-button {
-  float: right;
-}
-.section {
-  margin: 20px 0;
-  background-color: #add8e6;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-h3 {
-  margin-top: 0;
-}
-
-.percentage {
-  background-color: #e0e0e0;
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-.item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #dcdcdc;
-  margin: 10px 0;
-  border-radius: 5px;
-}
-
-.delete-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* _____________________________Todo__________________________ */
-.app {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.order-button,
-.add-task-button {
-  background-color: #e6e6e6;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.add-task-button {
-  background-color: #b3b3ff;
-  color: white;
-}
-
-.task-list {
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  padding: 20px;
-}
-
-.task {
-  background-color: #d9d9f3;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 20px;
+.container {
   display: flex;
   flex-direction: column;
-}
+  align-items: center;
+  justify-content: center;
 
-.course {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.task-name {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.posted-date,
-.due-date,
-.memo {
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.done-button {
-  background-color: #b3b3ff;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 5px;
   margin-top: 20px;
 }
-
-/* _________________________Edit Todo_______________________ */
-.app {
-  font-family: Arial, sans-serif;
-  padding: 20px;
+.container * {
+  margin: 5px 5px 0 0;
 }
 
-.back-button {
-  background-color: #b3b3ff;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
-.form {
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  padding: 20px;
-  width: 400px;
-  margin: auto;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.input-field {
-  width: calc(100% - 20px);
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.course-name,
-.task-name,
-.memo-field {
-  background-color: #d9d9f3;
-}
-
-.date-time-group {
+.align_right {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
-.date-field,
-.time-field {
-  width: 22%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.memo-field {
-  height: 100px;
-  background-color: #d9d9f3;
-}
-
-.delete-button,
-.save-button {
-  background-color: #b3b3ff;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 20px;
-  width: 48%;
-}
-
-.delete-button {
-  background-color: #ff9999;
-  margin-right: 4%;
+.align_center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

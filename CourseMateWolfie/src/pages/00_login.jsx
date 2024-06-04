@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Login() {
   return (
-    <>
-      <form>
-        <h2 className="center-align">Course Mate Wolfie</h2>
+    <div className="flexible_body">
+      <form className="container">
+        <h2>Course Mate Wolfie</h2>
         <div>
           <div>ID: </div>
           <input type="text"></input>
@@ -13,12 +13,15 @@ export default function Login() {
           <div>Password: </div>
           <input type="password"></input>
         </div>
-        <input type="submit" value={'login'}></input>
-        <div>
-          <span>No Account?</span>
-          <input type="button" value={'sign in'}></input>
+        <div className="align_right" style={{ width: "55%" }}>
+          <input type="submit" value={"Log in"}></input>
         </div>
       </form>
-    </>
+      <div style={{ height: "30px" }}></div>
+      <div className="align_center">
+        <span style={{ marginRight: "10px" }}>No Account?</span>
+        <input type="button" value={"Sign up"}></input>
+      </div>
+    </div>
   );
 }

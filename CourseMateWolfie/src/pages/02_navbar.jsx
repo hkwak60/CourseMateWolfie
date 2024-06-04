@@ -9,7 +9,9 @@ export default function Navbar() {
         <ActiveLink to="/gradeEval">Grade Evaluation</ActiveLink>
         <ActiveLink to="/edit_gradeEval">Edit Grade Evaluation</ActiveLink>
         <ActiveLink to="/todo">Todo</ActiveLink>
-        <ActiveLink to="/editTodo">EditTodo</ActiveLink>
+        <ActiveLink to="/edit_todo">EditTodo</ActiveLink>
+        <ActiveLink to="/schedule">Schedule</ActiveLink>
+        <ActiveLink to="/edit_schedule">Edit Schedule</ActiveLink>
       </ul>
     </nav>
   );
