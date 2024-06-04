@@ -14,7 +14,6 @@ export default function Navbar() {
           user_name: res.data[0].user_name,
           user_password: res.data[0].user_password,
         };
-        console.log(newdata);
         setName(newdata.user_name);
       })
       .catch((e) => {
