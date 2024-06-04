@@ -73,6 +73,31 @@ app.post("/updateOnline", (req, res) => {
   });
 });
 
+app.post("/updateGradeEval", (req, res) => {
+  const infos = req.body;
+
+  const sqlQuery =
+    "INSERT INTO course_eval (user_id, course, item, average, denom, percentage) VALUES (?)";
+  let value = [
+    infos.user_id,
+    infos.course,
+    infos.item,
+    infos.average,
+    infos.denom,
+    infos.percentage,
+  ];
+
+  db.query(sqlQuery, [value], (err, result) => {
+    if (err) {
+      console.error("Error inserting account: ", err);
+      res.status(500).send("Error inserting account");
+    } else {
+      console.log("Account inserted successfully");
+      res.status(200).send("Account inserted successfully");
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`running on port ${port}`);
 });

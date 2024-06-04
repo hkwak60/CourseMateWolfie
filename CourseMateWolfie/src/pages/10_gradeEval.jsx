@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import React from "react";
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 const courses = [
-  { name: 'CSE 310', score: '89/100', grade: 'B+' },
-  { name: 'CSE 316', score: '95/100', grade: 'A' },
-  { name: 'CSE 320', score: '92/100', grade: 'A-' },
-  { name: 'New Course', score: '0/100', grade: '-' },
+  { name: "CSE 310", score: "89/100", grade: "B+" },
+  { name: "CSE 316", score: "95/100", grade: "A" },
+  { name: "CSE 320", score: "92/100", grade: "A-" },
+  { name: "New Course", score: "0/100", grade: "-" },
 ];
 
 function ActiveLink({ to, children, ...props }) {
@@ -14,7 +14,7 @@ function ActiveLink({ to, children, ...props }) {
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
-    <li className={isActive ? 'active' : ''}>
+    <li className={isActive ? "active" : ""}>
       <Link to={to} {...props}>
         {children}
       </Link>
@@ -23,6 +23,10 @@ function ActiveLink({ to, children, ...props }) {
 }
 
 export default function CourseTable() {
+  const handlePage = (e) => {
+    window.location.href = "edit_gradeEval/CSE316";
+  };
+
   return (
     <main className="container">
       <table className="grade_display">
@@ -42,7 +46,11 @@ export default function CourseTable() {
         {/* <div className="horizontal_line"></div> */}
         <tbody>
           {courses.map((course, index) => (
-            <tr className="course_contents" key={index}>
+            <tr
+              onClick={() => handlePage()}
+              className="course_contents"
+              key={index}
+            >
               <td scope="row" className="course_name ">
                 <div className="course_name">{course.name}</div>
               </td>
