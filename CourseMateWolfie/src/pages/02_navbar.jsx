@@ -1,13 +1,13 @@
-import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/loadOnline')
+      .get("http://localhost:8000/loadOnline")
       .then((res) => {
         const newdata = {
           user_id: res.data[0].user_id,
@@ -23,14 +23,14 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = (e) => {
-    window.location.href = '/login';
+    window.location.href = "/login";
   };
 
   return (
     <>
       <div className="logout">
         <span className="username">username: {name}</span>
-        <input type="submit" value={'Log Out'} onClick={handleLogout}></input>
+        <input type="submit" value={"Log Out"} onClick={handleLogout}></input>
       </div>
       <div className="top_align">
         <nav className=" nav">
@@ -56,7 +56,7 @@ function ActiveLink({ to, children, ...props }) {
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
-    <li className={isActive ? 'active' : ''}>
+    <li className={isActive ? "active" : ""}>
       <Link to={to} {...props}>
         {children}
       </Link>
