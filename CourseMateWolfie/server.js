@@ -23,6 +23,13 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/loadAccount", (req, res) => {
+  const query = "SELECT * FROM users";
+  db.query(query, (err, results) => {
+    return res.send(results);
+  });
+});
+
 app.post("/postAccount", (req, res) => {
   const infos = req.body;
   console.log(infos);
@@ -40,9 +47,6 @@ app.post("/postAccount", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`running on port ${port}`);
-});
 /*
 app.post("/postData", (req, res) => {
   db.query("DELETE FROM question;");
