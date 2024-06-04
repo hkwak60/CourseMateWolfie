@@ -2,18 +2,24 @@ import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 
 export default function Navbar() {
   return (
-    <nav className="nav">
-      <ul>
-        {/* <ActiveLink to="/login">Log In</ActiveLink>
+    <>
+      <div className="logout">
+        <span className="username">username: hanschoi</span>
+        <input type="submit" value={'Log Out'}></input>
+      </div>
+      <nav className="nav">
+        <ul>
+          {/* <ActiveLink to="/login">Log In</ActiveLink>
         <ActiveLink to="/signup">Sign Up</ActiveLink> */}
-        <ActiveLink to="/gradeEval">Grade Evaluation</ActiveLink>
-        {/* <ActiveLink to="/edit_gradeEval">Edit Grade Evaluation</ActiveLink> */}
-        <ActiveLink to="/todo">Todo</ActiveLink>
-        {/* <ActiveLink to="/edit_todo">EditTodo</ActiveLink> */}
-        <ActiveLink to="/schedule">Schedule</ActiveLink>
-        {/* <ActiveLink to="/edit_schedule">Edit Schedule</ActiveLink> */}
-      </ul>
-    </nav>
+          <ActiveLink to="/gradeEval">Grade Evaluation</ActiveLink>
+          {/* <ActiveLink to="/edit_gradeEval">Edit Grade Evaluation</ActiveLink> */}
+          <ActiveLink to="/todo">Todo</ActiveLink>
+          {/* <ActiveLink to="/edit_todo">EditTodo</ActiveLink> */}
+          <ActiveLink to="/schedule">Schedule</ActiveLink>
+          {/* <ActiveLink to="/edit_schedule">Edit Schedule</ActiveLink> */}
+        </ul>
+      </nav>
+    </>
   );
 }
 

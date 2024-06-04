@@ -43,7 +43,7 @@ export default function CourseTable() {
           ))}
         </tbody>
       </table>
-      <ActiveLink className="navbutton" to="/editCourse">
+      <ActiveLink className="navbutton" to="/edit_gradeEval">
         Add Course
       </ActiveLink>
     </main>

@@ -93,6 +93,14 @@ input[value='Sign up'] {
   color: var(--lightactiveColor);
 }
 
+.logout {
+  display: flex;
+  justify-content: right;
+}
+.username {
+  margin-right: 10px;
+}
+
 /* ____________________Reusable_____________________________________________________________ */
 .flexible_body {
   max-width: 600px;
