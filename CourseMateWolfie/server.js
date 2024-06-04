@@ -15,29 +15,29 @@ const db = mysql.createConnection({
   database: "project",
 });
 
-app.get("/", (req, res) => {
-  const sqlQuery = "";
-  db.query(sqlQuery, (err, result) => {
-    console.log("Refresh");
-    res.send("success!");
-  });
-});
+// app.get("/", (req, res) => {
+//   const sqlQuery = "";
+//   db.query(sqlQuery, (err, result) => {
+//     console.log("Refresh");
+//     res.send("success!");
+//   });
+// });
 
-app.post("/postAccount", (req, res) => {
-  const infos = req.body;
-  const sqlQuery = "INSERT INTO users (user_name, user_password) VALUES (?)";
-  let values = [infos.user_name, infos.user_password];
+// app.post("/postAccount", (req, res) => {
+//   const infos = req.body;
+//   const sqlQuery = "INSERT INTO users (user_name, user_password) VALUES (?)";
+//   let values = [infos.user_name, infos.user_password];
 
-  db.query(sqlQuery, [values], (err, result) => {
-    if (err) {
-      console.error("Error inserting account: ", err);
-      res.status(500).send("Error inserting account");
-    } else {
-      console.log("Account inserted successfully");
-      res.status(200).send("Account inserted successfully");
-    }
-  });
-});
+//   db.query(sqlQuery, [values], (err, result) => {
+//     if (err) {
+//       console.error("Error inserting account: ", err);
+//       res.status(500).send("Error inserting account");
+//     } else {
+//       console.log("Account inserted successfully");
+//       res.status(200).send("Account inserted successfully");
+//     }
+//   });
+// });
 /*
 app.post("/postData", (req, res) => {
   db.query("DELETE FROM question;");
