@@ -1,9 +1,25 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SignUp() {
+  const [userData, setUserData] = useState();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/loadAccount")
+      .then((res) => {
+        const newdata = res.data.map((data) => ({
+          user_name: data.user_name,
+          user_password: data.user_password,
+        }));
+        setUserData(newdata);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
 
   const handleName = (onChangeValue) => {
     setName(onChangeValue.target.value);
@@ -19,20 +35,27 @@ export default function SignUp() {
     } else if (password.length < 4) {
       alert("Use password of at least 4 characters!");
     } else {
-      const idpw = {
-        user_name: name,
-        user_password: password,
-      };
-      console.log("check1");
-      axios
-        .post("http://localhost:8000/postAccount", idpw, {})
-        .then((response) => {})
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-      console.log("check2");
-      alert("New account created!");
-      window.location.href = "/login";
+      let idx = -1;
+      userData.forEach((data, i) => {
+        if (data.user_name === name) idx = i;
+      });
+
+      if (idx != -1) {
+        alert("ID already exists!");
+      } else {
+        const idpw = {
+          user_name: name,
+          user_password: password,
+        };
+        axios
+          .post("http://localhost:8000/postAccount", idpw, {})
+          .then((response) => {})
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        alert("New account created!");
+        window.location.href = "/login";
+      }
     }
   };
 

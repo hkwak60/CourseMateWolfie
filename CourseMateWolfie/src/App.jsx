@@ -1,18 +1,21 @@
-import Login from './pages/00_login.jsx';
-import SignUp from './pages/01_signup.jsx';
-import Navbar from './pages/02_navbar.jsx';
-import GradeEval from './pages/10_gradeEval.jsx';
-import EditGradeEval from './pages/11_edit_gradeEval.jsx';
-import Todo from './pages/20_todo.jsx';
-import EditTodo from './pages/21_edit_todo.jsx';
-import Schedule from './pages/30_schedule.jsx';
-import EditSchedule from './pages/31_edit_schedule.jsx';
-import { Route, Routes } from 'react-router-dom';
+import Login from "./pages/00_login.jsx";
+import SignUp from "./pages/01_signup.jsx";
+import Navbar from "./pages/02_navbar.jsx";
+import ShowNavbar from "./pages/03_showNavbar.jsx";
+import GradeEval from "./pages/10_gradeEval.jsx";
+import EditGradeEval from "./pages/11_edit_gradeEval.jsx";
+import Todo from "./pages/20_todo.jsx";
+import EditTodo from "./pages/21_edit_todo.jsx";
+import Schedule from "./pages/30_schedule.jsx";
+import EditSchedule from "./pages/31_edit_schedule.jsx";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <ShowNavbar>
+        <Navbar />
+      </ShowNavbar>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
