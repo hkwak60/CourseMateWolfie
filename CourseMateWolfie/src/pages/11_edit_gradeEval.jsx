@@ -6,10 +6,11 @@ import { useParams } from "react-router-dom";
 
 export default function CourseDetails() {
   const [id, setId] = useState(-1);
-  const { data } = useParams();
+  const { pageData } = useParams();
   const [boxes, setBoxes] = useState([]);
 
   useEffect(() => {
+    console.log("Debug", pageData);
     axios
       .get("http://localhost:8000/loadOnline")
       .then((res) => {
@@ -24,19 +25,19 @@ export default function CourseDetails() {
         console.error(e);
       });
 
-    // axios
-    // .get("http://localhost:8000/loadGradeEval")
-    // .then((res) => {
-    //   const newdata = {
-    //     user_id: res.data[0].user_id,
-    //     user_name: res.data[0].user_name,
-    //     user_password: res.data[0].user_password,
-    //   };
-    //   setId(newdata.user_id);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
+    axios
+      .get("http://localhost:8000/loadCourse", pageData)
+      .then((res) => {
+        // const newdata = {
+        //   user_id: res.data[0].user_id,
+        //   user_name: res.data[0].user_name,
+        //   user_password: res.data[0].user_password,
+        // };
+        // setId(newdata.user_id);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   }, []);
 
   const addBox = () => {

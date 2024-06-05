@@ -50,13 +50,16 @@ export default function CourseTable() {
 
   const handlePage = (e, i) => {
     console.log(boxes);
-    axios
-      .post("http://localhost:8000/removeCourse", boxes[i].course)
-      .then((response) => {})
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    // window.location.href = "edit_gradeEval/CSE316";
+    // axios
+    //   .post("http://localhost:8000/removeCourse", boxes[i])
+    //   .then((response) => {})
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
+    let conv = boxes[i].user_id + "@" + boxes[i].course;
+    let path = "edit_gradeEval/" + conv;
+    alert(conv);
+    window.location.href = path;
   };
   const handleNewPage = (e, i) => {};
 
