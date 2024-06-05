@@ -73,9 +73,14 @@ app.post("/updateOnline", (req, res) => {
   });
 });
 
-app.get("/loadCourse", (req, res) => {
-  let target = req.body.course;
+app.post("/loadCourse", (req, res) => {
+  let target = req.body;
   console.log(target);
+
+  const query = "SELECT (id, course) = (?) FROM course_eval";
+  db.query(query, target, (err, results) => {
+    return res.send(results);
+  });
   // const delQuery = "DELETE FROM course_eval WHERE course = (?)";
   // db.query(delQuery, target, (err, results) => {
   //   return res.send(results);

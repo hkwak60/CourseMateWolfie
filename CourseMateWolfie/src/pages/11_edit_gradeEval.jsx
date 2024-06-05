@@ -6,11 +6,11 @@ import { useParams } from "react-router-dom";
 
 export default function CourseDetails() {
   const [id, setId] = useState(-1);
-  const { pageData } = useParams();
+  const { data } = useParams();
   const [boxes, setBoxes] = useState([]);
 
   useEffect(() => {
-    console.log("Debug", pageData);
+    console.log("Debug", data);
     axios
       .get("http://localhost:8000/loadOnline")
       .then((res) => {
@@ -24,16 +24,11 @@ export default function CourseDetails() {
       .catch((e) => {
         console.error(e);
       });
-
+    console.log(data.split("@"));
     axios
-      .get("http://localhost:8000/loadCourse", pageData)
+      .post("http://localhost:8000/loadCourse", data.split("@"))
       .then((res) => {
-        // const newdata = {
-        //   user_id: res.data[0].user_id,
-        //   user_name: res.data[0].user_name,
-        //   user_password: res.data[0].user_password,
-        // };
-        // setId(newdata.user_id);
+        console.log("res", res.data);
       })
       .catch((e) => {
         console.error(e);
