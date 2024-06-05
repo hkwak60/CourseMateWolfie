@@ -73,6 +73,13 @@ app.post("/updateOnline", (req, res) => {
   });
 });
 
+app.get("/loadGradeEval", (req, res) => {
+  const query = "SELECT * FROM course_eval";
+  db.query(query, (err, results) => {
+    return res.send(results);
+  });
+});
+
 app.post("/updateGradeEval", (req, res) => {
   const infos = req.body;
 
@@ -86,6 +93,9 @@ app.post("/updateGradeEval", (req, res) => {
     infos.denom,
     infos.percentage,
   ];
+
+  const delQuery = "DELETE FROM course_eval WHERE course = (?)";
+  db.query(delQuery, infos.course);
 
   db.query(sqlQuery, [value], (err, result) => {
     if (err) {
