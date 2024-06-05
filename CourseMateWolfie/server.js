@@ -121,6 +121,20 @@ app.post("/updateGradeEval", (req, res) => {
   });
 });
 
+app.post("/deleteGradeEval", (req, res) => {
+  console.log(req.body);
+  const delQuery = "DELETE FROM course_eval WHERE course = ?";
+  db.query(delQuery, req.body, (err, results) => {
+    if (err) {
+      console.error("Error deleting course: ", err);
+      res.status(500).send("Error deleting course");
+    } else {
+      console.log("course deleted successfully");
+      res.status(200).send("course deleted successfully");
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`running on port ${port}`);
 });

@@ -14,7 +14,6 @@ export default function CourseDetails() {
   useEffect(() => {
     const [_, newCourse] = data.split("@");
     setCourse(newCourse);
-
     axios.get("http://localhost:8000/loadOnline").then((res) => {
       setId(res.data[0].user_id);
     });
@@ -60,6 +59,18 @@ export default function CourseDetails() {
     const newdata = [...boxes];
     newdata.splice(i, 1);
     setBoxes(newdata);
+  };
+
+  const handleDelete = (course) => {
+    console.log(course);
+    axios
+      .post("http://localhost:8000/deleteGradeEval", [course])
+      .then((response) => {})
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    alert("deleted!");
+    window.location.href = "/gradeEval";
   };
 
   const handleSave = (e) => {
@@ -162,12 +173,21 @@ export default function CourseDetails() {
       </button>
       <h1>Course Name</h1>
       <h2>
-        <input value={course} onChange={(e) => handleCourse(e)} />
+        <input
+          value={course}
+          onChange={(e) => handleCourse(e)}
+          disabled={data !== "@"}
+        />
       </h2>
       {boxes.map((data, i) => {
         return boxForm(i, data.item, data.average, data.denom, data.percentage);
       })}
-      <button className="delete-course-button">Delete this course</button>
+      <button
+        className="delete-course-button"
+        onClick={() => handleDelete(course)}
+      >
+        Delete this course
+      </button>
       <button className="save-button" onClick={() => handleSave()}>
         Save
       </button>

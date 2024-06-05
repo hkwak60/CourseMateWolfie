@@ -17,7 +17,7 @@ CREATE TABLE course_eval (
 	course nvarchar(30),
     item nvarchar(200),
     average nvarchar(200),
-    denom int,
+    denom nvarchar(200),
     percentage varchar(200)
 );
 

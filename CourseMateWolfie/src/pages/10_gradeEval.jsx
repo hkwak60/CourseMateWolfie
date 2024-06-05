@@ -92,10 +92,14 @@ export default function CourseTable() {
           </div>
         </td>
         <td className="course_score">
-          <div className="course_details">{sum}/100</div>
+          <div onClick={(e) => handlePage(e, i)} className="course_details">
+            {sum}/100
+          </div>
         </td>
         <td className="course_letter">
-          <div className="course_details">{letterGrade}</div>
+          <div onClick={(e) => handlePage(e, i)} className="course_details">
+            {letterGrade}
+          </div>
         </td>
       </tr>
     );
