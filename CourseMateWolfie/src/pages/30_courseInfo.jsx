@@ -1,27 +1,31 @@
 import React from "react";
+import { useEffect, useState } from "react";
 
-const courses = [
-  {
-    name: "CSE 310",
-    classroom: "B204",
-    professor: "Aruna",
-    memo: "Computer Network",
-  },
-  {
-    name: "CSE 316",
-    classroom: "B203",
-    professor: "Mione",
-    memo: "Webpage Development",
-  },
-  {
-    name: "CSE 320",
-    classroom: "B205",
-    professor: "Aruna",
-    memo: "Software Development",
-  },
-  { name: "New Course", classroom: "-", professor: "-", memo: "-" },
-];
 export default function CourseInfo() {
+  const [courses, setCourses] = useState([
+    {
+      name: "CSE 310",
+      classroom: "B204",
+      professor: "Aruna",
+      memo: "Computer Network",
+    },
+    {
+      name: "CSE 316",
+      classroom: "B203",
+      professor: "Mione",
+      memo: "Webpage Development",
+    },
+    {
+      name: "CSE 320",
+      classroom: "B205",
+      professor: "Aruna",
+      memo: "Software Development",
+    },
+    { name: "New Course", classroom: "-", professor: "-", memo: "-" },
+    { name: "New Course", classroom: "-", professor: "-", memo: "-" },
+    { name: "New Course", classroom: "-", professor: "-", memo: "-" },
+    { name: "New Course", classroom: "-", professor: "-", memo: "-" },
+  ]);
   return (
     <main className="flexible_body background_box">
       <table className="grade_display">
@@ -31,7 +35,7 @@ export default function CourseInfo() {
               Course Name
             </th>
             <th className="course_room" scope="col">
-              Classroom
+              <div className="margin_right">Classroom</div>
             </th>
             <th className="course_prof" scope="col">
               Professor
@@ -49,7 +53,9 @@ export default function CourseInfo() {
                 <div className="course_name">{course.name}</div>
               </td>
               <td className="course_room">
-                <div className="course_details">{course.classroom}</div>
+                <div className="course_details padding_right">
+                  {course.classroom}
+                </div>
               </td>
               <td className="course_prof">
                 <div className="course_details">{course.professor}</div>
@@ -61,7 +67,10 @@ export default function CourseInfo() {
           ))}
         </tbody>
       </table>
-      <a className="navbutton" href="http://localhost:5173/edit_courseInfo">
+      <a
+        className="button navbutton margin_top display-right"
+        href="http://localhost:5173/edit_courseInfo"
+      >
         Add Course
       </a>
     </main>

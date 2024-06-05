@@ -56,8 +56,10 @@ input[value="Save"],
   cursor: pointer;
   margin: 20px 0;
   background-color: var(--buttonColor);
-  border: 0.5px solid black;
   border-radius: 5px;
+  border: none;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
 }
 
 .auth_button {
@@ -167,7 +169,6 @@ tbody,
 .course_name {
   width: 400px;
   text-align: left;
-  /* border-bottom: 2px solid black; */
 }
 tbody .course_name {
   font-size: 30px;
@@ -186,6 +187,11 @@ tbody .course_name {
   list-style-type: none;
   background-color: var(--tableColor);
   padding: 10px;
+  border-bottom: 2px solid black;
+}
+
+.task-color {
+  color: rgb(74, 74, 74);
 }
 
 .header > li,
@@ -193,6 +199,7 @@ tbody .course_name {
   display: inline-block;
   background-color: inherit;
 }
+
 .task * {
   background-color: inherit;
   display: inline-block;
@@ -207,7 +214,7 @@ tbody .course_name {
   width: 200px;
 }
 .task-name {
-  width: 300px;
+  width: 200px;
 }
 .posted-date {
   width: 130px;
@@ -219,6 +226,7 @@ tbody .course_name {
 .task-display {
   margin: 10px;
 }
+
 .background_box > div,
 .background_box > h4 {
   background-color: inherit;
@@ -272,7 +280,7 @@ tbody .course_name {
 
 /* ______________________________CourseInfo______________________________ */
 .course_name1 {
-  width: 200px;
+  width: 300px;
   text-align: left;
   /* border-bottom: 2px solid black; */
 }
@@ -363,6 +371,9 @@ tbody .course_name1 {
 }
 .button:active {
   background-color: var(--activeColor);
+  border: none;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
 }
 
 .horizontal_line {
@@ -382,6 +393,23 @@ tbody .course_name1 {
   justify-content: center;
   color: black;
   text-decoration: none;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.returnlogin {
+  width: 80px;
+  height: 20px;
+  padding: 5px;
+  background-color: var(--lightBackgroundColor);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  text-decoration: none;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
 }
 
 .returnbutton {
@@ -402,10 +430,19 @@ tbody .course_name1 {
 .margin_left {
   margin-left: 20px;
 }
+.margin_right {
+  margin-right: 30px;
+}
 .margin_top {
   margin-top: 10px;
 }
+.padding_right {
+  padding-right: 30px;
+}
 
+.display-right {
+  margin-left: 86%;
+}
 li {
   list-style: none;
 }
@@ -420,7 +457,7 @@ li {
 }
 
 .big-size {
-  font-size: 30px;
+  font-size: 27px;
 }
 .biggest-size {
   font-size: 50px;
@@ -434,9 +471,20 @@ li {
   cursor: pointer;
   margin: 20px 0;
   background-color: var(--buttonColor);
-  border: 0.5px solid black;
   border-radius: 5px;
   color: brown;
+  border: none;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+}
+.deletebutton:hover {
+  color: var(--lightBackgroundColor);
+}
+.deletebutton:active {
+  background-color: brown;
+  border: none;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
 }
 
 .buttons_display {

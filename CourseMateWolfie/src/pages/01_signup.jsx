@@ -60,8 +60,8 @@ export default function SignUp() {
 
   return (
     <div className="flexible_body">
-      <a className="navbutton" href="http://localhost:5173/login">
-        ←
+      <a className="returnlogin button" href="http://localhost:5173/login">
+        return
       </a>
       <form className="margin container">
         <h2 className="center-align">Sign up</h2>
