@@ -1,11 +1,14 @@
 import React from 'react';
 
 export default function Todo() {
+  const handlePage = (e) => {
+    window.location.href = 'edit_Todo/CSE316';
+  };
   function Task({ course, task, postedDate, dueDate, memo }) {
     return (
       <div className="inline-block">
         <input type="radio" name="finished" value="done" />
-        <div className="task">
+        <div onClick={() => handlePage()} className="task">
           <div className="course big-size">{course}</div>
           <div className="task-name big-size">{task}</div>
           <div className="posted-date">{postedDate}</div>

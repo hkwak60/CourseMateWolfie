@@ -17,108 +17,117 @@ export default function TodoDetails() {
   });
   const [memo, setMemo] = useState('Write a team project proposal');
 
+  function dueDateInput(date) {
+    return (
+      <div className="dateInput">
+        <div className="dates">
+          <input
+            type="text"
+            value={date.mm}
+            onChange={(e) => setDueDate({ ...date, mm: e.target.value })}
+            placeholder="MM"
+          />
+          /
+          <input
+            type="text"
+            value={date.dd}
+            onChange={(e) => setDueDate({ ...date, dd: e.target.value })}
+            placeholder="DD"
+          />
+          /
+          <input
+            type="text"
+            value={date.yyyy}
+            onChange={(e) => setDueDate({ ...date, yyyy: e.target.value })}
+            placeholder="YYYY"
+          />
+        </div>
+        <input
+          type="text"
+          value={date.time}
+          onChange={(e) => setDueDate({ ...date, time: e.target.value })}
+          placeholder="Time"
+        />
+      </div>
+    );
+  }
+
+  function postDateInput(date) {
+    return (
+      <div className="dateInput">
+        <div className="dates">
+          <input
+            type="text"
+            value={date.mm}
+            onChange={(e) => setPostedDate({ ...date, mm: e.target.value })}
+            placeholder="MM"
+          />
+          /
+          <input
+            type="text"
+            value={date.dd}
+            onChange={(e) => setPostedDate({ ...date, dd: e.target.value })}
+            placeholder="DD"
+          />
+          /
+          <input
+            type="text"
+            value={date.yyyy}
+            onChange={(e) => setPostedDate({ ...date, yyyy: e.target.value })}
+            placeholder="YYYY"
+          />
+        </div>
+
+        <input
+          type="text"
+          value={date.time}
+          onChange={(e) => setPostedDate({ ...date, time: e.target.value })}
+          placeholder="Time"
+        />
+      </div>
+    );
+  }
   return (
-    <div>
-      <button className="navbutton biggest-size">←</button>
-      <div>
-        <div>
-          <label>Course Name</label>
+    <div className="flexible_body background_box edit_box">
+      <a
+        href="http://localhost:5173/todo"
+        className="margin_left margin_top returnbutton biggest-size button"
+      >
+        ←
+      </a>
+      <div className="background_box detail_box">
+        <h4>Course Name</h4>
+        <input
+          className="inputbox"
+          type="text"
+          value={courseName}
+          onChange={(e) => setCourseName(e.target.value)}
+        />
+        <h4>Task</h4>
+        <input
+          className=" taskbox"
+          type="text"
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
+        />
+        <h4>Posted Date</h4>
+        {postDateInput(postedDate)}
+        <h4>Due Date</h4>
+        {dueDateInput(dueDate)}
+        <h4>Memo</h4>
+        <textarea
+          className="memobox"
+          value={memo}
+          onChange={(e) => setMemo(e.target.value)}
+        />
+        <div className="buttons_display">
           <input
-            type="text"
-            value={courseName}
-            onChange={(e) => setCourseName(e.target.value)}
-          />
+            className="deletebutton"
+            type="submit"
+            value={'Delete this task'}
+          ></input>
+          <input className="button" type="submit" value={'Save'}></input>
         </div>
-        <div>
-          <label>Task</label>
-          <input
-            type="text"
-            value={taskName}
-            onChange={(e) => setTaskName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Posted Date</label>
-          <div>
-            <input
-              type="text"
-              value={postedDate.mm}
-              onChange={(e) =>
-                setPostedDate({ ...postedDate, mm: e.target.value })
-              }
-              placeholder="MM"
-            />
-            <input
-              type="text"
-              value={postedDate.dd}
-              onChange={(e) =>
-                setPostedDate({ ...postedDate, dd: e.target.value })
-              }
-              placeholder="DD"
-            />
-            <input
-              type="text"
-              value={postedDate.yyyy}
-              onChange={(e) =>
-                setPostedDate({ ...postedDate, yyyy: e.target.value })
-              }
-              className="input-field date-field"
-              placeholder="YYYY"
-            />
-            <input
-              type="text"
-              value={postedDate.time}
-              onChange={(e) =>
-                setPostedDate({ ...postedDate, time: e.target.value })
-              }
-              className="input-field time-field"
-              placeholder="Time"
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <label>Due Date</label>
-          <div className="date-time-group">
-            <input
-              type="text"
-              value={dueDate.mm}
-              onChange={(e) => setDueDate({ ...dueDate, mm: e.target.value })}
-              className="input-field date-field"
-              placeholder="MM"
-            />
-            <input
-              type="text"
-              value={dueDate.dd}
-              onChange={(e) => setDueDate({ ...dueDate, dd: e.target.value })}
-              className="input-field date-field"
-              placeholder="DD"
-            />
-            <input
-              type="text"
-              value={dueDate.yyyy}
-              onChange={(e) => setDueDate({ ...dueDate, yyyy: e.target.value })}
-              className="input-field date-field"
-              placeholder="YYYY"
-            />
-            <input
-              type="text"
-              value={dueDate.time}
-              onChange={(e) => setDueDate({ ...dueDate, time: e.target.value })}
-              className="input-field time-field"
-              placeholder="Time"
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <label>Memo</label>
-          <textarea
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-            className="input-field memo-field"
-          />
-        </div>
-        <button className="delete-button">Delete this task</button>
-        <button className="save-button">Save</button>
       </div>
     </div>
   );

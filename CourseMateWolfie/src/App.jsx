@@ -23,6 +23,7 @@ function App() {
         <Route path="/gradeEval" element={<GradeEval />} />
         <Route path="/edit_gradeEval/:data" element={<EditGradeEval />} />
         <Route path="/todo" element={<Todo />} />
+        <Route path="/edit_todo/:data" element={<EditTodo />} />
         <Route path="/edit_todo" element={<EditTodo />} />
         <Route path="/courseInfo" element={<CourseInfo />} />
         <Route path="/edit_courseInfo" element={<EditCourseInfo />} />

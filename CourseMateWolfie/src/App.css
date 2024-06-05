@@ -70,16 +70,20 @@ input[value='Save'],
 }
 
 /* ____________________NAVBAR_____________________________________________________________ */
-
+.center {
+  display: flex;
+  justify-content: center;
+}
 .nav {
   background-color: var(--lightBackgroundColor);
-  max-width: 800px;
+  width: 800px;
   height: 80px;
   font-weight: bold;
   font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  justify-self: center;
 }
 .nav ul {
   list-style: none;
@@ -228,6 +232,44 @@ tbody .course_name {
   width: 2.25em;
   height: 2.25em;
   accent-color: var(--actionblue);
+}
+
+/* ____________________________Edit Todo__________________________________ */
+.taskbox {
+  font-weight: 900;
+  font-size: 20px;
+  width: 300px;
+  height: 40px;
+  border-radius: 13px;
+  padding-left: 5px;
+  background-color: var(--buttonColor);
+  color: #fcfcfc;
+  border: 0.5 solid grey;
+}
+
+.dateInput {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dates {
+  width: 400px;
+  display: flex;
+  font-size: 35px;
+  background-color: inherit;
+  justify-content: space-between;
+}
+
+.dateInput input {
+  font-weight: 900;
+  font-size: 20px;
+  width: 100px;
+  height: 40px;
+  border-radius: 13px;
+  padding-left: 5px;
+  background-color: var(--buttonColor);
+  color: #fcfcfc;
+  border: 0.5 solid grey;
 }
 
 /* ______________________________CourseInfo______________________________ */
@@ -383,4 +425,22 @@ li {
 }
 .biggest-size {
   font-size: 50px;
+}
+
+.deletebutton {
+  /*buttons*/
+  width: 200px;
+  height: 40px;
+  font-size: 1em;
+  cursor: pointer;
+  margin: 20px 0;
+  background-color: var(--buttonColor);
+  border: 0.5px solid black;
+  border-radius: 5px;
+  color: brown;
+}
+
+.buttons_display {
+  display: flex;
+  justify-content: space-between;
 }

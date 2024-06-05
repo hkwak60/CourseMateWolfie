@@ -31,7 +31,7 @@ export default function Navbar() {
         <span className="username">username: {name}</span>
         <input type="submit" value={'Log Out'} onClick={handleLogout}></input>
       </div>
-      <div>
+      <div className="center">
         <nav className="nav">
           <ul>
             {/* <ActiveLink to="/login">Log In</ActiveLink>
