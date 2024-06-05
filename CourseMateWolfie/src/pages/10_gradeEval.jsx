@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const courses = [
   { name: "CSE 310", score: "89/100", grade: "B+" },
@@ -23,8 +25,75 @@ function ActiveLink({ to, children, ...props }) {
 }
 
 export default function CourseTable() {
+  const [boxes, setBoxes] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/loadGradeEval")
+      .then((res) => {
+        const newdata = res.data.map((data) => {
+          return {
+            user_id: data.id,
+            course: data.course,
+            item: data.item,
+            average: data.average,
+            denom: data.denom,
+            percentage: data.percentage,
+          };
+        });
+        setBoxes(newdata);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
+
   const handlePage = (e) => {
     window.location.href = "edit_gradeEval/CSE316";
+    // console.log(boxes);
+  };
+
+  const boxForm = (name, average, denom, percentage, i) => {
+    const averages = average.split("#");
+    const denoms = denom.split("#");
+    const percentages = percentage.split("#");
+    let perc_sum = 0;
+    percentages.forEach((data) => {
+      perc_sum += parseFloat(data);
+    });
+    let sum = 0;
+    averages.forEach((data, i) => {
+      let avg = parseFloat(data);
+      let den = parseFloat(denoms[i]);
+      let per = parseFloat(percentages[i]);
+      sum += (avg / den) * 100 * (per / perc_sum);
+    });
+    let letter = "";
+    let op = "";
+    if (sum / 10 >= 9) letter = "A";
+    else if (sum / 10 >= 8) letter = "B";
+    else if (sum / 10 >= 7) letter = "C";
+    else letter = "F";
+
+    if (sum % 10 >= 7 && letter !== "A" && letter !== "F") op = "+";
+    if (sum % 10 <= 3 && letter !== "F") op = "-";
+
+    const letterGrade = letter + op;
+    return (
+      <tr className="course_contents" key={i}>
+        <td scope="row" className="course_name ">
+          <div onClick={(e) => handlePage(e)} className="course_name">
+            {name}
+          </div>
+        </td>
+        <td className="course_score">
+          <div className="course_details">{sum}/100</div>
+        </td>
+        <td className="course_letter">
+          <div className="course_details">{letterGrade}</div>
+        </td>
+      </tr>
+    );
   };
 
   return (
@@ -43,28 +112,13 @@ export default function CourseTable() {
             </th>
           </tr>
         </thead>
-        {/* <div className="horizontal_line"></div> */}
         <tbody>
-          {courses.map((course, index) => (
-            <tr
-              onClick={() => handlePage()}
-              className="course_contents"
-              key={index}
-            >
-              <td scope="row" className="course_name ">
-                <div className="course_name">{course.name}</div>
-              </td>
-              <td className="course_score">
-                <div className="course_details">{course.score}</div>
-              </td>
-              <td className="course_letter">
-                <div className="course_details">{course.grade}</div>
-              </td>
-            </tr>
-          ))}
+          {boxes.map((data, i) =>
+            boxForm(data.course, data.average, data.denom, data.percentage, i)
+          )}
         </tbody>
       </table>
-      <a className="navbutton" href="http://localhost:5173/edit_gradeEval">
+      <a className="navbutton" onClick={handlePage}>
         Add Course
       </a>
     </main>
