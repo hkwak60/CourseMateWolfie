@@ -71,7 +71,7 @@ export default function Login() {
           <input
             className="password"
             type="password"
-            onChange={() => handlePassword()}
+            onChange={handlePassword}
           ></input>
         </div>
         <div className=" align_right auth_button">
@@ -79,7 +79,7 @@ export default function Login() {
             className="button"
             type="submit"
             value={"Log in"}
-            onClick={() => handleLogin()}
+            onClick={handleLogin}
           ></input>
         </div>
       </form>
@@ -90,7 +90,7 @@ export default function Login() {
           className="button"
           type="button"
           value={"Sign up"}
-          onClick={() => handleSignup()}
+          onClick={handleSignup}
         ></input>
       </div>
     </div>
