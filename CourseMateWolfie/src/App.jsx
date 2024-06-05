@@ -22,6 +22,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/gradeEval" element={<GradeEval />} />
         <Route path="/edit_gradeEval/:data" element={<EditGradeEval />} />
+        <Route path="/edit_gradeEval/" element={<EditGradeEval />} />
         <Route path="/todo" element={<Todo />} />
         <Route path="/edit_todo/:data" element={<EditTodo />} />
         <Route path="/edit_todo" element={<EditTodo />} />
