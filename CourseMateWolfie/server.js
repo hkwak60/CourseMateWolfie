@@ -122,7 +122,6 @@ app.post("/updateGradeEval", (req, res) => {
 });
 
 app.post("/deleteGradeEval", (req, res) => {
-  console.log(req.body);
   const delQuery = "DELETE FROM course_eval WHERE course = ?";
   db.query(delQuery, req.body, (err, results) => {
     if (err) {
