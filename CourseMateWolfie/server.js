@@ -11,7 +11,12 @@ app.use(cors());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
+<<<<<<< HEAD
   password: "dufwlak123*",
+=======
+  password: "chlgkstmd1",
+  // password: "dufwlak123*",
+>>>>>>> 9363d06bfb9e3830052580772858715a4788e035
   database: "project",
 });
 
@@ -73,13 +78,17 @@ app.post("/updateOnline", (req, res) => {
   });
 });
 
-app.get("/loadCourse", (req, res) => {
-  let target = req.body.course;
+app.post("/loadCourse", (req, res) => {
+  let target = req.body[1];
   console.log(target);
-  // const delQuery = "DELETE FROM course_eval WHERE course = (?)";
-  // db.query(delQuery, target, (err, results) => {
-  //   return res.send(results);
-  // });
+
+  const query = "SELECT * FROM course_eval WHERE course = (?)";
+  db.query(query, target, (err, results) => {
+    return res.send(results);
+  });
+
+  const delQuery = "DELETE FROM course_eval WHERE course = (?)";
+  db.query(delQuery, target, (err, results) => {});
 });
 
 app.get("/loadGradeEval", (req, res) => {
