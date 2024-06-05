@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Login() {
   const [userData, setUserData] = useState();
-  const [nameInput, setNameInput] = useState('');
-  const [pwInput, setPwInput] = useState('');
+  const [nameInput, setNameInput] = useState("");
+  const [pwInput, setPwInput] = useState("");
 
   const handleName = (onChangeValue) => {
     setNameInput(onChangeValue.target.value);
@@ -28,24 +28,24 @@ export default function Login() {
           user_password: pwInput,
         };
         axios
-          .post('http://localhost:8000/updateOnline', idpw, {})
+          .post("http://localhost:8000/updateOnline", idpw, {})
           .then((response) => {})
           .catch((error) => {
-            console.error('Error:', error);
+            console.error("Error:", error);
           });
 
-        window.location.href = '/gradeEval';
-      } else alert('Login failed!');
-    } else alert('Login failed!');
+        window.location.href = "/gradeEval";
+      } else alert("Login failed!");
+    } else alert("Login failed!");
   };
 
   const handleSignup = (e) => {
-    window.location.href = '/signup';
+    window.location.href = "/signup";
   };
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/loadAccount')
+      .get("http://localhost:8000/loadAccount")
       .then((res) => {
         const newdata = res.data.map((data) => ({
           user_name: data.user_name,
@@ -71,26 +71,26 @@ export default function Login() {
           <input
             className="password"
             type="password"
-            onChange={handlePassword}
+            onChange={() => handlePassword()}
           ></input>
         </div>
         <div className=" align_right auth_button">
           <input
             className="button"
             type="submit"
-            value={'Log in'}
-            onClick={handleLogin}
+            value={"Log in"}
+            onClick={() => handleLogin()}
           ></input>
         </div>
       </form>
-      <div style={{ height: '30px' }}></div>
+      <div style={{ height: "30px" }}></div>
       <div className="align_center">
-        <span style={{ marginRight: '10px' }}>No Account?</span>
+        <span style={{ marginRight: "10px" }}>No Account?</span>
         <input
           className="button"
           type="button"
-          value={'Sign up'}
-          onClick={handleSignup}
+          value={"Sign up"}
+          onClick={() => handleSignup()}
         ></input>
       </div>
     </div>
