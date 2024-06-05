@@ -73,6 +73,14 @@ app.post("/updateOnline", (req, res) => {
   });
 });
 
+app.post("/removeCourse", (req, res) => {
+  console.log(req.body);
+  // const delQuery = "DELETE FROM course_eval WHERE course = (?)";
+  // db.query(delQuery, (err, results) => {
+  // return res.send(results);
+  // });
+});
+
 app.get("/loadGradeEval", (req, res) => {
   const query = "SELECT * FROM course_eval";
   db.query(query, (err, results) => {

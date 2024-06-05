@@ -33,7 +33,7 @@ export default function CourseTable() {
       .then((res) => {
         const newdata = res.data.map((data) => {
           return {
-            user_id: data.id,
+            user_id: data.user_id,
             course: data.course,
             item: data.item,
             average: data.average,
@@ -48,10 +48,17 @@ export default function CourseTable() {
       });
   }, []);
 
-  const handlePage = (e) => {
-    window.location.href = "edit_gradeEval/CSE316";
-    // console.log(boxes);
+  const handlePage = (e, i) => {
+    console.log(boxes);
+    axios
+      .post("http://localhost:8000/removeCourse", boxes[i].course)
+      .then((response) => {})
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    // window.location.href = "edit_gradeEval/CSE316";
   };
+  const handleNewPage = (e, i) => {};
 
   const boxForm = (name, average, denom, percentage, i) => {
     const averages = average.split("#");
@@ -82,7 +89,7 @@ export default function CourseTable() {
     return (
       <tr className="course_contents" key={i}>
         <td scope="row" className="course_name ">
-          <div onClick={(e) => handlePage(e)} className="course_name">
+          <div onClick={(e) => handlePage(e, i)} className="course_name">
             {name}
           </div>
         </td>
