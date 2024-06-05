@@ -6,25 +6,13 @@ import { useParams } from "react-router-dom";
 
 export default function CourseDetails() {
   const [id, setId] = useState(-1);
+  const [course, setCourse] = useState("");
   const { data } = useParams();
   const [boxes, setBoxes] = useState([]);
 
   useEffect(() => {
-    console.log("Debug", data);
-    axios
-      .get("http://localhost:8000/loadOnline")
-      .then((res) => {
-        const newdata = {
-          user_id: res.data[0].user_id,
-          user_name: res.data[0].user_name,
-          user_password: res.data[0].user_password,
-        };
-        setId(newdata.user_id);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-    console.log(data.split("@"));
+    setId(data.split("@")[0]);
+    setCourse(data.split("@")[1]);
     axios
       .post("http://localhost:8000/loadCourse", data.split("@"))
       .then((res) => {
@@ -93,6 +81,9 @@ export default function CourseDetails() {
     else newdata[i].percentage = onChangeValue.target.value;
     setBoxes(newdata);
   };
+  const handleCourse = (onChangeValue) => {
+    setCourse(onChangeValue.target.value);
+  };
 
   const boxForm = (i, item, average, denom, percentage) => {
     return (
@@ -145,7 +136,9 @@ export default function CourseDetails() {
         + Add Item
       </button>
       <h1>Course Name</h1>
-      <h2>CSE 316</h2>
+      <h2>
+        <input value={course} onChangeValue={(e) => handleCourse(e)} />
+      </h2>
       {boxes.map((data, i) => {
         return boxForm(i, data.item, data.average, data.denom, data.percentage);
       })}
