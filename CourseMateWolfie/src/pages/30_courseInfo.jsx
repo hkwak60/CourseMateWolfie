@@ -1,29 +1,29 @@
-import React from 'react';
+import React from "react";
 
 const courses = [
   {
-    name: 'CSE 310',
-    classroom: 'B204',
-    professor: 'Aruna',
-    memo: 'Computer Network',
+    name: "CSE 310",
+    classroom: "B204",
+    professor: "Aruna",
+    memo: "Computer Network",
   },
   {
-    name: 'CSE 316',
-    classroom: 'B203',
-    professor: 'Mione',
-    memo: 'Webpage Development',
+    name: "CSE 316",
+    classroom: "B203",
+    professor: "Mione",
+    memo: "Webpage Development",
   },
   {
-    name: 'CSE 320',
-    classroom: 'B205',
-    professor: 'Aruna',
-    memo: 'Software Development',
+    name: "CSE 320",
+    classroom: "B205",
+    professor: "Aruna",
+    memo: "Software Development",
   },
-  { name: 'New Course', classroom: '-', professor: '-', memo: '-' },
+  { name: "New Course", classroom: "-", professor: "-", memo: "-" },
 ];
 export default function CourseInfo() {
   return (
-    <main className="container">
+    <main className="flexible_body background_box">
       <table className="grade_display">
         <thead className="line">
           <tr className="grade_header">

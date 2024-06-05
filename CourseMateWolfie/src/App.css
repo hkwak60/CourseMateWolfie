@@ -44,10 +44,10 @@ body > div > div > * {
   background-color: var(--standardBackgroundColor);
 }
 
-input[value='Log in'],
-input[value='Create'],
-input[value='Sign up'],
-input[value='Save'],
+input[value="Log in"],
+input[value="Create"],
+input[value="Sign up"],
+input[value="Save"],
 .done-button {
   /*buttons*/
   width: 100px;
@@ -115,10 +115,8 @@ input[value='Save'],
 }
 /* ______________________________Grade Eval________________________________________ */
 .grade_display {
-  background-color: var(--tableColor);
+  background-color: inherit;
   justify-self: center;
-  padding: 20px 20px 70px 20px;
-  border-radius: 5px;
   border-spacing: 0px;
 }
 
@@ -226,7 +224,7 @@ tbody .course_name {
   background-color: inherit;
 }
 
-[type='radio'] {
+[type="radio"] {
   border: max(2px, 0.1em) solid gray;
   border-radius: 50%;
   width: 2.25em;
@@ -292,10 +290,10 @@ tbody .course_name1 {
 }
 
 /* _______________________________Edit Course Info________________________________ */
-.detail_box {
-  /* margin-top: 90px; */
+/* .detail_box {
+  margin-top: 90px;
   padding: 30px;
-}
+} */
 
 .background_box > h4 {
   margin-bottom: 0px;
@@ -414,10 +412,11 @@ li {
 
 .background_box {
   background-color: var(--tableColor);
+  padding: 20px 20px 50px 20px;
 }
 
 .edit_box {
-  height: 800px;
+  height: 850px;
 }
 
 .big-size {

@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function TodoDetails() {
-  const [courseName, setCourseName] = useState('CSE 316');
-  const [taskName, setTaskName] = useState('Project Proposal');
+  const [courseName, setCourseName] = useState("CSE 316");
+  const [taskName, setTaskName] = useState("Project Proposal");
   const [postedDate, setPostedDate] = useState({
-    mm: '04',
-    dd: '24',
-    yyyy: '2024',
-    time: '10:00 AM',
+    mm: "04",
+    dd: "24",
+    yyyy: "2024",
+    time: "10:00 AM",
   });
   const [dueDate, setDueDate] = useState({
-    mm: '04',
-    dd: '29',
-    yyyy: '2024',
-    time: '11:59 PM',
+    mm: "04",
+    dd: "29",
+    yyyy: "2024",
+    time: "11:59 PM",
   });
-  const [memo, setMemo] = useState('Write a team project proposal');
+  const [memo, setMemo] = useState("Write a team project proposal");
 
   function dueDateInput(date) {
     return (
@@ -124,9 +124,9 @@ export default function TodoDetails() {
           <input
             className="deletebutton"
             type="submit"
-            value={'Delete this task'}
+            value={"Delete this task"}
           ></input>
-          <input className="button" type="submit" value={'Save'}></input>
+          <input className="button" type="submit" value={"Save"}></input>
         </div>
       </div>
     </div>
