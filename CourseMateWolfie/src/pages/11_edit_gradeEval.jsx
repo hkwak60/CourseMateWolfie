@@ -66,10 +66,10 @@ export default function CourseDetails() {
     if (course.length === 0) alert("Enter course name!");
     else if (boxes[0] === null || boxes[0] === undefined) alert("Add subject!");
     else {
-      let comb_item = boxes[0].item;
-      let comb_avg = boxes[0].average;
-      let comb_den = boxes[0].denom;
-      let comb_per = boxes[0].percentage;
+      let comb_item = "" + boxes[0].item;
+      let comb_avg = "" + boxes[0].average;
+      let comb_den = "" + boxes[0].denom;
+      let comb_per = "" + boxes[0].percentage;
       boxes.forEach((data, i) => {
         if (i !== 0) {
           comb_item += "#" + data.item;
