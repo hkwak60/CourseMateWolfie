@@ -9,14 +9,34 @@ export default function CourseDetails() {
   const [course, setCourse] = useState("");
   const { data } = useParams();
   const [boxes, setBoxes] = useState([]);
+  let newPageFlag = 0;
 
   useEffect(() => {
-    setId(data.split("@")[0]);
-    setCourse(data.split("@")[1]);
+    const [_, newCourse] = data.split("@");
+    setCourse(newCourse);
+
+    axios.get("http://localhost:8000/loadOnline").then((res) => {
+      setId(res.data[0].user_id);
+    });
+
     axios
       .post("http://localhost:8000/loadCourse", data.split("@"))
       .then((res) => {
-        console.log("res", res.data);
+        const loaded = res.data[0];
+        const items = loaded.item.split("#");
+        const averages = loaded.average.split("#");
+        const denoms = loaded.denom.split("#");
+        const percentages = loaded.percentage.split("#");
+
+        const newdata = items.map((data, i) => {
+          return {
+            item: data,
+            average: parseInt(averages[i]),
+            denom: parseInt(denoms[i]),
+            percentage: parseInt(percentages[i]),
+          };
+        });
+        setBoxes(newdata);
       })
       .catch((e) => {
         console.error(e);
@@ -24,6 +44,7 @@ export default function CourseDetails() {
   }, []);
 
   const addBox = () => {
+    // console.log("Add Boxes", boxes);
     const newdata = [
       ...boxes,
       {
@@ -34,7 +55,6 @@ export default function CourseDetails() {
       },
     ];
     setBoxes(newdata);
-    console.log("Debug:", boxes);
   };
   const removeBox = (i) => {
     const newdata = [...boxes];
@@ -43,34 +63,39 @@ export default function CourseDetails() {
   };
 
   const handleSave = (e) => {
-    let comb_item = boxes[0].item;
-    let comb_avg = boxes[0].average;
-    let comb_den = boxes[0].denom;
-    let comb_per = boxes[0].percentage;
-    boxes.forEach((data, i) => {
-      if (i !== 0) {
-        comb_item += "#" + data.item;
-        comb_avg += "#" + data.average;
-        comb_den += "#" + data.denom;
-        comb_per += "#" + data.percentage;
-      }
-    });
-
-    const newdata = {
-      user_id: id,
-      course: data,
-      item: comb_item,
-      average: comb_avg,
-      denom: comb_den,
-      percentage: comb_per,
-    };
-    axios
-      .post("http://localhost:8000/updateGradeEval", newdata, {})
-      .then((response) => {})
-      .catch((error) => {
-        console.error("Error:", error);
+    if (course.length === 0) alert("Enter course name!");
+    else if (boxes[0] === null || boxes[0] === undefined) alert("Add subject!");
+    else {
+      let comb_item = boxes[0].item;
+      let comb_avg = boxes[0].average;
+      let comb_den = boxes[0].denom;
+      let comb_per = boxes[0].percentage;
+      boxes.forEach((data, i) => {
+        if (i !== 0) {
+          comb_item += "#" + data.item;
+          comb_avg += "#" + data.average;
+          comb_den += "#" + data.denom;
+          comb_per += "#" + data.percentage;
+        }
       });
-    alert("saved!");
+
+      const newdata = {
+        user_id: id,
+        course: course,
+        item: comb_item,
+        average: comb_avg,
+        denom: comb_den,
+        percentage: comb_per,
+      };
+      axios
+        .post("http://localhost:8000/updateGradeEval", newdata, {})
+        .then((response) => {})
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      alert("saved!");
+      window.location.href = "/gradeEval";
+    }
   };
 
   const handleChange = (onChangeValue, i, change) => {
@@ -87,7 +112,7 @@ export default function CourseDetails() {
 
   const boxForm = (i, item, average, denom, percentage) => {
     return (
-      <div className="section">
+      <div className="section" key={i}>
         <input value={item} onChange={(e) => handleChange(e, i, 1)}></input>
         <div className="item">
           <span className="score">
@@ -137,7 +162,7 @@ export default function CourseDetails() {
       </button>
       <h1>Course Name</h1>
       <h2>
-        <input value={course} onChangeValue={(e) => handleCourse(e)} />
+        <input value={course} onChange={(e) => handleCourse(e)} />
       </h2>
       {boxes.map((data, i) => {
         return boxForm(i, data.item, data.average, data.denom, data.percentage);

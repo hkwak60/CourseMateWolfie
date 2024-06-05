@@ -49,19 +49,21 @@ export default function CourseTable() {
   }, []);
 
   const handlePage = (e, i) => {
-    console.log(boxes);
-    // axios
-    //   .post("http://localhost:8000/removeCourse", boxes[i])
-    //   .then((response) => {})
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
-    let conv = boxes[i].user_id + "@" + boxes[i].course;
-    let path = "edit_gradeEval/" + conv;
-    alert(conv);
-    window.location.href = path;
+    if (i == -1) {
+      let path = "edit_gradeEval/@";
+      window.location.href = path;
+    } else {
+      // axios
+      //   .post("http://localhost:8000/removeCourse", boxes[i])
+      //   .then((response) => {})
+      //   .catch((error) => {
+      //     console.error("Error:", error);
+      //   });
+      let conv = boxes[i].user_id + "@" + boxes[i].course;
+      let path = "edit_gradeEval/" + conv;
+      window.location.href = path;
+    }
   };
-  const handleNewPage = (e, i) => {};
 
   const boxForm = (name, average, denom, percentage, i) => {
     const averages = average.split("#");
@@ -128,7 +130,7 @@ export default function CourseTable() {
           )}
         </tbody>
       </table>
-      <a className="navbutton" onClick={handlePage}>
+      <a className="navbutton" onClick={(e) => handlePage(e, -1)}>
         Add Course
       </a>
     </main>
