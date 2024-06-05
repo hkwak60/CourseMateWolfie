@@ -3,13 +3,6 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const courses = [
-  { name: "CSE 310", score: "89/100", grade: "B+" },
-  { name: "CSE 316", score: "95/100", grade: "A" },
-  { name: "CSE 320", score: "92/100", grade: "A-" },
-  { name: "New Course", score: "0/100", grade: "-" },
-];
-
 function ActiveLink({ to, children, ...props }) {
   //Special type to treat navigation
   const resolvedPath = useResolvedPath(to);
@@ -88,7 +81,7 @@ export default function CourseTable() {
     else letter = "F";
 
     if (sum % 10 >= 7 && letter !== "A" && letter !== "F") op = "+";
-    if (sum % 10 <= 3 && letter !== "F") op = "-";
+    if (sum !== 100 && sum % 10 <= 3 && letter !== "F") op = "-";
 
     const letterGrade = letter + op;
     return (
