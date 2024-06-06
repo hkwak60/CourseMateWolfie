@@ -11,8 +11,8 @@ app.use(cors());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  // password: "chlgkstmd1",
-  password: "dufwlak123*",
+  password: "chlgkstmd1",
+  // password: "dufwlak123*",
   database: "project",
 });
 
@@ -125,6 +125,13 @@ app.post("/updateGradeEval", (req, res) => {
   });
 });
 
+app.get("/loadTodoList", (req, res) => {
+  const query = "SELECT * FROM todo";
+  db.query(query, (err, results) => {
+    return res.send(results);
+  });
+});
+
 app.post("/deleteGradeEval", (req, res) => {
   const delQuery = "DELETE FROM course_eval WHERE course = ?";
   db.query(delQuery, req.body, (err, results) => {
@@ -134,6 +141,35 @@ app.post("/deleteGradeEval", (req, res) => {
     } else {
       console.log("course deleted successfully");
       res.status(200).send("course deleted successfully");
+    }
+  });
+});
+
+app.post("/updateTodo", (req, res) => {
+  const infos = req.body;
+  console.log(infos);
+
+  const sqlQuery =
+    "INSERT INTO todo (user_id, course, task, posted_date, due_date, memo) VALUES (?)";
+  let value = [
+    infos.user_id,
+    infos.course,
+    infos.task,
+    infos.posted_date,
+    infos.due_date,
+    infos.memo,
+  ];
+
+  const delQuery = "DELETE FROM todo WHERE task = (?)";
+  db.query(delQuery, infos.task, (err, results) => {});
+
+  db.query(sqlQuery, [value], (err, result) => {
+    if (err) {
+      console.error("Error inserting account: ", err);
+      res.status(500).send("Error inserting account");
+    } else {
+      console.log("Account inserted successfully");
+      res.status(200).send("Account inserted successfully");
     }
   });
 });
