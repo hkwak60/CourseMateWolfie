@@ -106,7 +106,7 @@ export default function CourseTable() {
   };
 
   return (
-    <main className="container">
+    <main className="background_box flexible_body">
       <table className="grade_display">
         <thead className="line">
           <tr className="grade_header">
@@ -127,7 +127,10 @@ export default function CourseTable() {
           )}
         </tbody>
       </table>
-      <a className="navbutton" onClick={(e) => handlePage(e, -1)}>
+      <a
+        className="button navbutton margin_top display-right1"
+        onClick={(e) => handlePage(e, -1)}
+      >
         Add Course
       </a>
     </main>

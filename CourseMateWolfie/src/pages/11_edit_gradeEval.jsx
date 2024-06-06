@@ -123,8 +123,12 @@ export default function CourseDetails() {
 
   const boxForm = (i, item, average, denom, percentage) => {
     return (
-      <div className="section" key={i}>
-        <input value={item} onChange={(e) => handleChange(e, i, 1)}></input>
+      <div className="itembox" key={i}>
+        <input
+          className="item-input"
+          value={item}
+          onChange={(e) => handleChange(e, i, 1)}
+        ></input>
         <div className="item">
           <span className="score">
             <input value={average} onChange={(e) => handleChange(e, i, 2)} />
@@ -134,7 +138,7 @@ export default function CourseDetails() {
           <button className="delete-button" onClick={() => removeBox(i)}>
             🗑️
           </button>
-          <div className="percentage">
+          <h4>
             Percentage:{" "}
             {
               <input
@@ -143,54 +147,54 @@ export default function CourseDetails() {
               />
             }{" "}
             / 100
-          </div>
+          </h4>
         </div>
       </div>
     );
   };
 
-  function ActiveLink({ to, children, ...props }) {
-    //Special type to treat navigation
-    const resolvedPath = useResolvedPath(to);
-    const isActive = useMatch({ path: resolvedPath.pathname, end: true });
-
-    return (
-      <li className={isActive ? "active" : ""}>
-        <Link to={to} {...props}>
-          {children}
-        </Link>
-      </li>
-    );
-  }
-
   return (
-    <main className="course-details">
-      <ActiveLink className="navbutton" to="/gradeEval">
-        ←
-      </ActiveLink>
-      <button className="add-item-button" onClick={() => addBox()}>
-        + Add Item
-      </button>
-      <h1>Course Name</h1>
-      <h2>
+    <div className="flexible_body background_box">
+      <div className="edit_background_box detail_box">
+        <div className="buttons_display">
+          <a
+            href="http://localhost:5173/gradeEval"
+            className="margin_left margin_top returnbutton biggest-size button"
+          >
+            ←
+          </a>
+          <button className="button navbutton" onClick={() => addBox()}>
+            + Add Item
+          </button>
+        </div>
+        <h4>Course Name</h4>
         <input
+          className="inputbox"
           value={course}
           onChange={(e) => handleCourse(e)}
           disabled={data !== "@"}
         />
-      </h2>
-      {boxes.map((data, i) => {
-        return boxForm(i, data.item, data.average, data.denom, data.percentage);
-      })}
-      <button
-        className="delete-course-button"
-        onClick={() => handleDelete(course)}
-      >
-        Delete this course
-      </button>
-      <button className="save-button" onClick={() => handleSave()}>
-        Save
-      </button>
-    </main>
+        {boxes.map((data, i) => {
+          return boxForm(
+            i,
+            data.item,
+            data.average,
+            data.denom,
+            data.percentage
+          );
+        })}
+        <div className="buttons_display">
+          <button className="deletebutton" onClick={() => handleDelete(course)}>
+            Delete this course
+          </button>
+          <input
+            className="button"
+            type="submit"
+            value={"Save"}
+            onClick={() => handleSave()}
+          ></input>
+        </div>
+      </div>
+    </div>
   );
 }

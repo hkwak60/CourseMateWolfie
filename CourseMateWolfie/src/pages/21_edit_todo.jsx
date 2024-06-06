@@ -95,7 +95,7 @@ export default function TodoDetails() {
       >
         ←
       </a>
-      <div className="background_box detail_box">
+      <div className="edit_background_box detail_box">
         <h4>Course Name</h4>
         <input
           className="inputbox"
