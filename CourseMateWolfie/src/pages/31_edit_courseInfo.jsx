@@ -15,7 +15,7 @@ export default function Details() {
     const [_, newCourse] = data.split("@");
     setCourse(newCourse);
     axios
-      .post("http://localhost:8000/loadCourseDetails", { newCourse })
+      .post("http://localhost:8000/loadCourse", data.split("@"))
       .then((res) => {
         const newdata = res.data[0];
         setRoom(newdata.classroom);

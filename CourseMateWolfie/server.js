@@ -97,13 +97,6 @@ app.get("/loadGradeEval", (req, res) => {
   });
 });
 
-app.post("/loadCourseDetails", (req, res) => {
-  const query = "SELECT * FROM course_eval WHERE course = (?)";
-  db.query(query, req.body.newCourse, (err, results) => {
-    return res.send(results);
-  });
-});
-
 app.post("/updateGradeEval", (req, res) => {
   const infos = req.body;
 
