@@ -19,8 +19,6 @@ export default function TodoDetails() {
     m: null,
     ampm: null,
   });
-  const [memo, setMemo] = useState("Course memo");
-
   const [id, setId] = useState(-1);
   const [task, setTask] = useState("");
   const { data } = useParams();
@@ -28,50 +26,19 @@ export default function TodoDetails() {
     course: "",
     posted_date: "",
     due_date: "",
-    memo: "",
+    memo: "Course memo",
   });
 
-  const comb = (data) => {
-    const ampm = data.ampm === 1 ? "am" : "pm";
-    return (
-      data.mm +
-      "#" +
-      data.dd +
-      "#" +
-      data.yyyy +
-      "#" +
-      data.h +
-      "#" +
-      data.m +
-      "#" +
-      ampm
-    );
-  };
-
-  const handleSave = (e) => {
-    // if (info.course.length === 0) alert("Enter course name!");
-    // else if (task.length === 0) alert("Enter a task!");
-    // else {
-    const posted_comb = comb(postedDate);
-    const due_comb = comb(dueDate);
-
-    // const newdata = {
-    //   user_id: id,
-    //   course: course,
-    //   item: comb_item,
-    //   average: comb_avg,
-    //   denom: comb_den,
-    //   percentage: comb_per,
-    // };
-    // axios
-    //   .post("http://localhost:8000/updateGradeEval", newdata, {})
-    //   .then((response) => {})
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
-    // alert("saved!");
-    // window.location.href = "/gradeEval";
-    // }
+  const handleChange = (onChangeValue, i) => {
+    const val = onChangeValue;
+    let newdata;
+    if (i === 1) {
+      newdata = { ...info, course: val };
+    } else {
+      // i===2
+      newdata = { ...info, memo: val };
+    }
+    setInfo(newdata);
   };
 
   useEffect(() => {
@@ -105,41 +72,75 @@ export default function TodoDetails() {
         <div className="dates">
           <input
             type="number"
-            value={date.mm}
+            defaultValue={date.mm}
             onChange={(e) => func({ ...date, mm: e.target.value })}
             placeholder="MM"
           />
           /
           <input
             type="number"
-            value={date.dd}
+            defaultValue={date.dd}
             onChange={(e) => func({ ...date, dd: e.target.value })}
             placeholder="DD"
           />
           /
           <input
             type="number"
-            value={date.yyyy}
+            defaultValue={date.yyyy}
             onChange={(e) => func({ ...date, yyyy: e.target.value })}
             placeholder="YYYY"
           />
         </div>
         <input
           type="number"
-          value={date.h}
-          onChange={(e) => func({ ...date, time: e.target.value })}
+          defaultValue={date.h}
+          onChange={(e) => func({ ...date, h: e.target.value })}
           placeholder="hh"
         />
         {":"}
         <input
           type="number"
-          value={date.m}
-          onChange={(e) => func({ ...date, time: e.target.value })}
+          defaultValue={date.m}
+          onChange={(e) => func({ ...date, m: e.target.value })}
           placeholder="mm"
         />
         {date.ampm === 1 ? "am" : "pm"}
       </div>
     );
+  };
+
+  const comb = (data) => {
+    const ampm = data.ampm === 1 ? "am" : "pm";
+    return [data.mm, data.dd, data.yyyy, data.h, data.m, ampm].join("#");
+  };
+
+  const handleSave = (e) => {
+    console.log("posteds:", postedDate);
+    console.log("due:", dueDate);
+    if (info.course.length === 0) alert("Enter course name!");
+    else if (task.length === 0) alert("Enter a task!");
+    else {
+      const posted_comb = comb(postedDate);
+      const due_comb = comb(dueDate);
+      console.log("date1:", posted_comb);
+      const newdata = {
+        user_id: id,
+        task: task,
+        course: info.course,
+        posted_date: posted_comb,
+        due_date: due_comb,
+        memo: info.memo,
+      };
+      console.log("debug info", info);
+      axios
+        .post("http://localhost:8000/updateTodo", newdata)
+        .then((response) => {})
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      // alert("saved!");
+      // window.location.href = "/gradeEval";
+    }
   };
 
   return (
@@ -155,14 +156,14 @@ export default function TodoDetails() {
         <input
           className="inputbox"
           type="text"
-          value={course}
-          onChange={(e) => setCourse(e.target.value)}
+          defaultValue={info.course}
+          onChange={(e) => handleChange(e.target.value, 1)}
         />
         <h4>Task</h4>
         <input
           className=" taskbox"
           type="text"
-          value={task}
+          defaultValue={task}
           onChange={(e) => setTask(e.target.value)}
         />
         <h4>Posted Date</h4>
@@ -172,8 +173,8 @@ export default function TodoDetails() {
         <h4>Memo</h4>
         <textarea
           className="memobox"
-          value={memo}
-          onChange={(e) => setMemo(e.target.value)}
+          defaultValue={info.memo}
+          onChange={(e) => handleChange(e.target.value, 2)}
         />
         <div className="buttons_display">
           <input
@@ -181,7 +182,12 @@ export default function TodoDetails() {
             type="submit"
             value={"Delete this task"}
           ></input>
-          <input className="button" type="submit" value={"Save"}></input>
+          <input
+            className="button"
+            type="submit"
+            value={"Save"}
+            onClick={() => handleSave()}
+          ></input>
         </div>
       </div>
     </div>
