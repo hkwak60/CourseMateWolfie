@@ -81,9 +81,6 @@ app.post("/loadCourse", (req, res) => {
   db.query(query, target, (err, results) => {
     return res.send(results);
   });
-
-  // const delQuery = "DELETE FROM course_eval WHERE course = (?)";
-  // db.query(delQuery, target, (err, results) => {});
 });
 
 app.get("/loadGradeEval", (req, res) => {

@@ -3,99 +3,23 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function TodoDetails() {
-  const [courseName, setCourseName] = useState("CSE 316");
-  const [taskName, setTaskName] = useState("Project Proposal");
   const [postedDate, setPostedDate] = useState({
     mm: "04",
     dd: "24",
     yyyy: "2024",
-    time: "10:00 AM",
+    h: 10,
+    m: 0,
+    ampm: 1,
   });
   const [dueDate, setDueDate] = useState({
     mm: "04",
-    dd: "29",
-    yyyy: "2024",
-    time: "11:59 PM",
+    dd: null,
+    yyyy: null,
+    h: null,
+    m: null,
+    ampm: null,
   });
-  const [memo, setMemo] = useState("Write a team project proposal");
-
-  function dueDateInput(date) {
-    return (
-      <div className="dateInput">
-        <div className="dates">
-          <input
-            type="text"
-            value={date.mm}
-            onChange={(e) => setDueDate({ ...date, mm: e.target.value })}
-            placeholder="MM"
-          />
-          /
-          <input
-            type="text"
-            value={date.dd}
-            onChange={(e) => setDueDate({ ...date, dd: e.target.value })}
-            placeholder="DD"
-          />
-          /
-          <input
-            type="text"
-            value={date.yyyy}
-            onChange={(e) => setDueDate({ ...date, yyyy: e.target.value })}
-            placeholder="YYYY"
-          />
-        </div>
-        <input
-          type="text"
-          value={date.time}
-          onChange={(e) => setDueDate({ ...date, time: e.target.value })}
-          placeholder="hh"
-        />
-        {":"}
-        <input
-          type="text"
-          value={date.time}
-          onChange={(e) => setDueDate({ ...date, time: e.target.value })}
-          placeholder="mm"
-        />
-      </div>
-    );
-  }
-
-  function postDateInput(date) {
-    return (
-      <div className="dateInput">
-        <div className="dates">
-          <input
-            type="text"
-            value={date.mm}
-            onChange={(e) => setPostedDate({ ...date, mm: e.target.value })}
-            placeholder="MM"
-          />
-          /
-          <input
-            type="text"
-            value={date.dd}
-            onChange={(e) => setPostedDate({ ...date, dd: e.target.value })}
-            placeholder="DD"
-          />
-          /
-          <input
-            type="text"
-            value={date.yyyy}
-            onChange={(e) => setPostedDate({ ...date, yyyy: e.target.value })}
-            placeholder="YYYY"
-          />
-        </div>
-
-        <input
-          type="text"
-          value={date.time}
-          onChange={(e) => setPostedDate({ ...date, time: e.target.value })}
-          placeholder="Time"
-        />
-      </div>
-    );
-  }
+  const [memo, setMemo] = useState("Course memo");
 
   const [id, setId] = useState(-1);
   const [task, setTask] = useState("");
@@ -107,9 +31,52 @@ export default function TodoDetails() {
     memo: "",
   });
 
+  const comb = (data) => {
+    const ampm = data.ampm === 1 ? "am" : "pm";
+    return (
+      data.mm +
+      "#" +
+      data.dd +
+      "#" +
+      data.yyyy +
+      "#" +
+      data.h +
+      "#" +
+      data.m +
+      "#" +
+      ampm
+    );
+  };
+
+  const handleSave = (e) => {
+    // if (info.course.length === 0) alert("Enter course name!");
+    // else if (task.length === 0) alert("Enter a task!");
+    // else {
+    const posted_comb = comb(postedDate);
+    const due_comb = comb(dueDate);
+
+    // const newdata = {
+    //   user_id: id,
+    //   course: course,
+    //   item: comb_item,
+    //   average: comb_avg,
+    //   denom: comb_den,
+    //   percentage: comb_per,
+    // };
+    // axios
+    //   .post("http://localhost:8000/updateGradeEval", newdata, {})
+    //   .then((response) => {})
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
+    // alert("saved!");
+    // window.location.href = "/gradeEval";
+    // }
+  };
+
   useEffect(() => {
-    const [_, newTask] = data.split("@");
-    setTask(newTask);
+    // const [_, newTask] = data.split("@");
+    // setTask(newTask);
     axios.get("http://localhost:8000/loadOnline").then((res) => {
       setId(res.data[0].user_id);
     });
@@ -131,6 +98,50 @@ export default function TodoDetails() {
     // });
   }, []);
 
+  const dateInput = (date, i) => {
+    const func = i === 1 ? setPostedDate : setDueDate;
+    return (
+      <div className="dateInput">
+        <div className="dates">
+          <input
+            type="number"
+            value={date.mm}
+            onChange={(e) => func({ ...date, mm: e.target.value })}
+            placeholder="MM"
+          />
+          /
+          <input
+            type="number"
+            value={date.dd}
+            onChange={(e) => func({ ...date, dd: e.target.value })}
+            placeholder="DD"
+          />
+          /
+          <input
+            type="number"
+            value={date.yyyy}
+            onChange={(e) => func({ ...date, yyyy: e.target.value })}
+            placeholder="YYYY"
+          />
+        </div>
+        <input
+          type="number"
+          value={date.h}
+          onChange={(e) => func({ ...date, time: e.target.value })}
+          placeholder="hh"
+        />
+        {":"}
+        <input
+          type="number"
+          value={date.m}
+          onChange={(e) => func({ ...date, time: e.target.value })}
+          placeholder="mm"
+        />
+        {date.ampm === 1 ? "am" : "pm"}
+      </div>
+    );
+  };
+
   return (
     <div className="flexible_body background_box edit_box">
       <a
@@ -144,20 +155,20 @@ export default function TodoDetails() {
         <input
           className="inputbox"
           type="text"
-          value={courseName}
-          onChange={(e) => setCourseName(e.target.value)}
+          value={course}
+          onChange={(e) => setCourse(e.target.value)}
         />
         <h4>Task</h4>
         <input
           className=" taskbox"
           type="text"
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
         />
         <h4>Posted Date</h4>
-        {postDateInput(postedDate)}
+        {dateInput(postedDate, 1)}
         <h4>Due Date</h4>
-        {dueDateInput(dueDate)}
+        {dateInput(dueDate, 2)}
         <h4>Memo</h4>
         <textarea
           className="memobox"
