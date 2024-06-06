@@ -47,7 +47,7 @@ export default function CourseDetails() {
     const newdata = [
       ...boxes,
       {
-        item: "sample",
+        item: "ITEM",
         average: 0,
         denom: 1,
         percentage: 0,
