@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React from "react";
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function Details() {
-  const course = 'CSE310';
-  const [classroom, setRoom] = useState('B204');
-  const [professor, setProf] = useState('Aruna');
-  const [memo, setMemo] = useState('Computer Network');
+  const [course, setCourse] = useState("");
+  const [classroom, setRoom] = useState("B204");
+  const [professor, setProf] = useState("Aruna");
+  const [memo, setMemo] = useState("Computer Network");
+
+  const { data } = useParams();
+  useEffect(() => {
+    const [_, newCourse] = data.split("@");
+    setCourse(newCourse);
+  });
 
   return (
     <div className="flexible_body background_box edit_box">
@@ -21,12 +31,14 @@ export default function Details() {
         <input
           className="inputbox roomNo"
           defaultValue={classroom}
-        ></input>{' '}
+        ></input>{" "}
         <h4 className="inherit">Professor</h4>
         <input className="inputbox" defaultValue={professor}></input>
         <h4 className="inherit">Memo</h4>
         <textarea className="memobox" defaultValue={memo}></textarea>
-        <input className="button" type="submit" value={'Save'}></input>
+        <div className="display-right">
+          <input className="button " type="submit" value={"Save"}></input>
+        </div>
       </div>
     </div>
   );

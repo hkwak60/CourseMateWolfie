@@ -11,8 +11,8 @@ app.use(cors());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "chlgkstmd1",
-  // password: "dufwlak123*",
+  // password: "chlgkstmd1",
+  password: "dufwlak123*",
   database: "project",
 });
 
@@ -71,6 +71,13 @@ app.post("/updateOnline", (req, res) => {
       console.log("Account inserted successfully");
       res.status(200).send("Account inserted successfully");
     }
+  });
+});
+
+app.get("/getCourseNames", (req, res) => {
+  const query = "SELECT course FROM course_eval";
+  db.query(query, (err, results) => {
+    return res.send(results);
   });
 });
 

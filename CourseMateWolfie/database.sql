@@ -24,5 +24,4 @@ CREATE TABLE course_eval (
 TRUNCATE TABLE users;
 SELECT * FROM users;
 SELECT * FROM online_user;
-
 SELECT * FROM course_eval;

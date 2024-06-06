@@ -1,21 +1,6 @@
 import React from "react";
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-function ActiveLink({ to, children, ...props }) {
-  //Special type to treat navigation
-  const resolvedPath = useResolvedPath(to);
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
-
-  return (
-    <li className={isActive ? "active" : ""}>
-      <Link to={to} {...props}>
-        {children}
-      </Link>
-    </li>
-  );
-}
 
 export default function CourseTable() {
   const [boxes, setBoxes] = useState([]);
