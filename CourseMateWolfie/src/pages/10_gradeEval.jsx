@@ -46,12 +46,6 @@ export default function CourseTable() {
       let path = "edit_gradeEval/@";
       window.location.href = path;
     } else {
-      // axios
-      //   .post("http://localhost:8000/removeCourse", boxes[i])
-      //   .then((response) => {})
-      //   .catch((error) => {
-      //     console.error("Error:", error);
-      //   });
       let conv = boxes[i].user_id + "@" + boxes[i].course;
       let path = "edit_gradeEval/" + conv;
       window.location.href = path;

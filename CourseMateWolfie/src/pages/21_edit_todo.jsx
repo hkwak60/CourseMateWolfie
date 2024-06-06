@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function TodoDetails() {
   const [courseName, setCourseName] = useState("CSE 316");
@@ -46,7 +48,14 @@ export default function TodoDetails() {
           type="text"
           value={date.time}
           onChange={(e) => setDueDate({ ...date, time: e.target.value })}
-          placeholder="Time"
+          placeholder="hh"
+        />
+        {":"}
+        <input
+          type="text"
+          value={date.time}
+          onChange={(e) => setDueDate({ ...date, time: e.target.value })}
+          placeholder="mm"
         />
       </div>
     );
@@ -87,6 +96,41 @@ export default function TodoDetails() {
       </div>
     );
   }
+
+  const [id, setId] = useState(-1);
+  const [task, setTask] = useState("");
+  const { data } = useParams();
+  const [info, setInfo] = useState({
+    course: "",
+    posted_date: "",
+    due_date: "",
+    memo: "",
+  });
+
+  useEffect(() => {
+    const [_, newTask] = data.split("@");
+    setTask(newTask);
+    axios.get("http://localhost:8000/loadOnline").then((res) => {
+      setId(res.data[0].user_id);
+    });
+
+    // axios
+    //   .post("http://localhost:8000/loadTodo", data.split("@"))
+    //   .then((res) => {
+    // const loaded = res.data[0];
+    // const newdata = {
+    //   course: loaded.course,
+    //   posted_date: loaded.posted_date,
+    //   due_date: loaded.due_date,
+    //   memo: loaded.memo,
+    // };
+    // setInfo(newdata);
+    // })
+    // .catch((e) => {
+    //   console.error(e);
+    // });
+  }, []);
+
   return (
     <div className="flexible_body background_box edit_box">
       <a

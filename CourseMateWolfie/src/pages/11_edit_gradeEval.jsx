@@ -9,7 +9,6 @@ export default function CourseDetails() {
   const [course, setCourse] = useState("");
   const { data } = useParams();
   const [boxes, setBoxes] = useState([]);
-  let newPageFlag = 0;
 
   useEffect(() => {
     const [_, newCourse] = data.split("@");
