@@ -80,7 +80,7 @@ export default function Todo() {
     <div className="flexible_body">
       <div className="align align_right">
         <p>Order: </p>
-        <select id="sort" name="cars">
+        <select id="sort" name="sorting">
           <option value="postedDate">Posted Date</option>
           <option value="dueDate">Due Date</option>
         </select>

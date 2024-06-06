@@ -3,16 +3,17 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function TodoDetails() {
+  // window.location.reload();
   const [postedDate, setPostedDate] = useState({
-    mm: "04",
-    dd: "24",
-    yyyy: "2024",
-    h: 10,
-    m: 0,
-    ampm: 1,
+    mm: null,
+    dd: null,
+    yyyy: null,
+    h: null,
+    m: null,
+    ampm: null,
   });
   const [dueDate, setDueDate] = useState({
-    mm: "04",
+    mm: null,
     dd: null,
     yyyy: null,
     h: null,
@@ -21,25 +22,13 @@ export default function TodoDetails() {
   });
   const [id, setId] = useState(-1);
   const [task, setTask] = useState("");
+  const [course, setcourse] = useState("");
+  const [memo, setMemo] = useState("");
+  const [ampm1, setAmpm1] = useState(1);
+  const [ampm2, setAmpm2] = useState(1);
   const { data } = useParams();
-  const [info, setInfo] = useState({
-    course: "",
-    posted_date: "",
-    due_date: "",
-    memo: "Course memo",
-  });
-
-  const handleChange = (onChangeValue, i) => {
-    const val = onChangeValue;
-    let newdata;
-    if (i === 1) {
-      newdata = { ...info, course: val };
-    } else {
-      // i===2
-      newdata = { ...info, memo: val };
-    }
-    setInfo(newdata);
-  };
+  const [info, setInfo] = useState(["", "", "", "Course memo"]);
+  // course, posted_date, due_date, memo
 
   useEffect(() => {
     const [_, newTask] = data.split("@");
@@ -51,21 +40,106 @@ export default function TodoDetails() {
     axios
       .post("http://localhost:8000/loadTodo", data.split("@"))
       .then((res) => {
-        console.log("task?:", res.data[0]);
-        // const loaded = res.data[0];
-        // const newdata = {
-        //   course: loaded.course,
-        //   posted_date: loaded.posted_date,
-        //   due_date: loaded.due_date,
-        //   memo: loaded.memo,
-        // };
-        // setInfo(newdata);
+        const loaded = res.data[0];
+        const newdata = [
+          loaded.course,
+          loaded.posted_date,
+          loaded.due_date,
+          loaded.memo,
+        ];
+        setInfo(newdata);
+        setcourse(loaded.course);
+        setMemo(loaded.memo);
+        setDate(loaded.posted_date, 1);
+        setDate(loaded.due_date, 2);
       })
       .catch((e) => {
         console.error(e);
       });
   }, []);
 
+  const handleChange = (onChangeValue, i) => {
+    const val = onChangeValue;
+    let newdata = [...info];
+    if (i === 1) {
+      newdata[0] = val;
+    } else {
+      // i===2
+      newdata[3] = val;
+    }
+    setInfo(newdata);
+  };
+  const handleAmpm = (e, i) => {
+    const func = i === 1 ? setPostedDate : setDueDate;
+    const ap = e.target.value == "am" ? 1 : 2;
+    func({ ...date, ampm: ap });
+  };
+
+  const setDate = (date, i) => {
+    const [mm, dd, yy, h, m, ampm] = date.split("#");
+    const func = i === 1 ? setPostedDate : setDueDate;
+    func({
+      ...date,
+      mm: mm,
+      dd: dd,
+      yyyy: yy,
+      h: h,
+      m: m,
+      ampm: ampm === "am" ? 1 : 2,
+    });
+  };
+
+  const comb = (data) => {
+    const ampm = data.ampm === 1 ? "am" : "pm";
+    return [data.mm, data.dd, data.yyyy, data.h, data.m, ampm].join("#");
+  };
+
+  const lenzero = (str) => {
+    return str.length === 0;
+  };
+  const handleSave = (e) => {
+    const [mm1, dd1, yy1, h1, m1, ampm1] = info[1].split("#");
+    const [mm2, dd2, yy2, h2, m2, ampm2] = info[2].split("#");
+
+    if (info[0].length === 0) alert("Enter course name!");
+    else if (task.length === 0) alert("Enter a task!");
+    else if (info[3].length === 0) alert("Enter a memo!");
+    else if (
+      lenzero(mm1) ||
+      lenzero(dd1) ||
+      lenzero(yy1) ||
+      lenzero(h1) ||
+      lenzero(m1) ||
+      lenzero(mm2) ||
+      lenzero(dd2) ||
+      lenzero(yy2) ||
+      lenzero(h2) ||
+      lenzero(m2)
+    ) {
+      alert("Enter date and time!");
+    } else {
+      const posted_comb = comb(postedDate);
+      const due_comb = comb(dueDate);
+      console.log("date1:", posted_comb);
+      const newdata = {
+        user_id: id,
+        task: task,
+        course: info[0],
+        posted_date: posted_comb,
+        due_date: due_comb,
+        memo: info[3],
+      };
+      console.log("debug info", info);
+      axios
+        .post("http://localhost:8000/updateTodo", newdata)
+        .then((response) => {})
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      alert("saved!");
+      window.location.href = "/todo";
+    }
+  };
   const dateInput = (date, i) => {
     const func = i === 1 ? setPostedDate : setDueDate;
     return (
@@ -105,49 +179,22 @@ export default function TodoDetails() {
           onChange={(e) => func({ ...date, m: e.target.value })}
           placeholder="mm"
         />
-        {date.ampm === 1 ? "am" : "pm"}
+        <select
+          defaultValue={date.ampm == 1 ? "am" : "pm"}
+          id="time"
+          name="timeperiod"
+          onChange={(e) => handleAmpm(e, i)}
+        >
+          <option value="am">AM</option>
+          <option value="pm">PM</option>
+        </select>
       </div>
     );
   };
-
-  const comb = (data) => {
-    const ampm = data.ampm === 1 ? "am" : "pm";
-    return [data.mm, data.dd, data.yyyy, data.h, data.m, ampm].join("#");
-  };
-
-  const handleSave = (e) => {
-    console.log("posteds:", postedDate);
-    console.log("due:", dueDate);
-    if (info.course.length === 0) alert("Enter course name!");
-    else if (task.length === 0) alert("Enter a task!");
-    else {
-      const posted_comb = comb(postedDate);
-      const due_comb = comb(dueDate);
-      console.log("date1:", posted_comb);
-      const newdata = {
-        user_id: id,
-        task: task,
-        course: info.course,
-        posted_date: posted_comb,
-        due_date: due_comb,
-        memo: info.memo,
-      };
-      console.log("debug info", info);
-      axios
-        .post("http://localhost:8000/updateTodo", newdata)
-        .then((response) => {})
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-      // alert("saved!");
-      // window.location.href = "/gradeEval";
-    }
-  };
-
   return (
     <div className="flexible_body background_box edit_box">
       <a
-        href="http://localhost:5173/todo"
+        href="/todo"
         className="margin_left margin_top returnbutton biggest-size button"
       >
         ←
@@ -157,7 +204,7 @@ export default function TodoDetails() {
         <input
           className="inputbox"
           type="text"
-          defaultValue={info.course}
+          defaultValue={course}
           onChange={(e) => handleChange(e.target.value, 1)}
         />
         <h4>Task</h4>
@@ -174,7 +221,7 @@ export default function TodoDetails() {
         <h4>Memo</h4>
         <textarea
           className="memobox"
-          defaultValue={info.memo}
+          defaultValue={memo}
           onChange={(e) => handleChange(e.target.value, 2)}
         />
         <div className="buttons_display">
