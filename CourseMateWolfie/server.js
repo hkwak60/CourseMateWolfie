@@ -11,8 +11,8 @@ app.use(cors());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "chlgkstmd1",
-  // password: "dufwlak123*",
+  // password: "chlgkstmd1",
+  password: "dufwlak123*",
   database: "project",
 });
 
@@ -178,6 +178,28 @@ app.post("/updateTodo", (req, res) => {
     } else {
       console.log("Account inserted successfully");
       res.status(200).send("Account inserted successfully");
+    }
+  });
+});
+
+app.post("/updateCourseDetails", (req, res) => {
+  const infos = req.body;
+  const sqlQuery =
+    "UPDATE course_eval SET classroom = ?, professor = ?, memo = ? WHERE user_id = ? AND course = ?";
+  let values = [
+    infos.classroom,
+    infos.professor,
+    infos.memo,
+    infos.user_id,
+    infos.course,
+  ];
+  db.query(sqlQuery, values, (err, result) => {
+    if (err) {
+      console.error("Error updating course details: ", err);
+      res.status(500).send("Error updating course details");
+    } else {
+      console.log("Course details updated successfully");
+      res.status(200).send("Course details updated successfully");
     }
   });
 });

@@ -6,14 +6,16 @@ import { useParams } from "react-router-dom";
 
 export default function Details() {
   const [course, setCourse] = useState();
-  const [classroom, setRoom] = useState("");
-  const [professor, setProf] = useState("");
-  const [memo, setMemo] = useState("");
+  const [classroom, setRoom] = useState();
+  const [professor, setProf] = useState();
+  const [memo, setMemo] = useState();
   const { data } = useParams();
+  const [id, setId] = useState();
 
   useEffect(() => {
-    const [_, newCourse] = data.split("@");
+    const [id, newCourse] = data.split("@");
     setCourse(newCourse);
+    setId(id);
     axios
       .post("http://localhost:8000/loadCourse", data.split("@"))
       .then((res) => {
@@ -37,14 +39,22 @@ export default function Details() {
   }
 
   function handleSave() {
+    const details = {
+      user_id: id,
+      course: course,
+      classroom: classroom,
+      professor: professor,
+      memo: memo,
+    };
+    console.log(details);
     axios
-      .post("http://localhost:8000/updateGradeEval", newdata, {})
+      .post("http://localhost:8000/updateCourseDetails", details, {})
       .then((response) => {})
       .catch((error) => {
         console.error("Error:", error);
       });
     alert("saved!");
-    window.location.href = "/gradeEval";
+    window.location.href = "/courseInfo";
   }
 
   return (
