@@ -132,13 +132,6 @@ app.post("/updateGradeEval", (req, res) => {
   });
 });
 
-app.get("/loadTodoList", (req, res) => {
-  const query = "SELECT * FROM todo";
-  db.query(query, (err, results) => {
-    return res.send(results);
-  });
-});
-
 app.post("/deleteGradeEval", (req, res) => {
   const delQuery = "DELETE FROM course_eval WHERE course = ?";
   db.query(delQuery, req.body, (err, results) => {
@@ -149,6 +142,21 @@ app.post("/deleteGradeEval", (req, res) => {
       console.log("course deleted successfully");
       res.status(200).send("course deleted successfully");
     }
+  });
+});
+
+app.get("/loadTodoList", (req, res) => {
+  const query = "SELECT * FROM todo";
+  db.query(query, (err, results) => {
+    return res.send(results);
+  });
+});
+
+app.post("/loadTodo", (req, res) => {
+  let target = req.body[1];
+  const query = "SELECT * FROM todo WHERE task = (?)";
+  db.query(query, target, (err, results) => {
+    return res.send(results);
   });
 });
 

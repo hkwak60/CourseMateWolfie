@@ -42,27 +42,28 @@ export default function TodoDetails() {
   };
 
   useEffect(() => {
-    // const [_, newTask] = data.split("@");
-    // setTask(newTask);
+    const [_, newTask] = data.split("@");
+    setTask(newTask);
     axios.get("http://localhost:8000/loadOnline").then((res) => {
       setId(res.data[0].user_id);
     });
 
-    // axios
-    //   .post("http://localhost:8000/loadTodo", data.split("@"))
-    //   .then((res) => {
-    // const loaded = res.data[0];
-    // const newdata = {
-    //   course: loaded.course,
-    //   posted_date: loaded.posted_date,
-    //   due_date: loaded.due_date,
-    //   memo: loaded.memo,
-    // };
-    // setInfo(newdata);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
+    axios
+      .post("http://localhost:8000/loadTodo", data.split("@"))
+      .then((res) => {
+        console.log("task?:", res.data[0]);
+        // const loaded = res.data[0];
+        // const newdata = {
+        //   course: loaded.course,
+        //   posted_date: loaded.posted_date,
+        //   due_date: loaded.due_date,
+        //   memo: loaded.memo,
+        // };
+        // setInfo(newdata);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   }, []);
 
   const dateInput = (date, i) => {

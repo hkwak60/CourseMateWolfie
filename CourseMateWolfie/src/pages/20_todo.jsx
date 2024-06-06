@@ -3,63 +3,78 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Todo() {
-  const [Tasks, setTasks] = useState([
-    {
-      course: "CSE 310",
-      task: "Assignment 1",
-      postedDate: "Apr 18, 10:00 am",
-      dueDate: "Apr 25, 11:59 pm",
-      memo: "Programming assignment with Python",
-    },
-    {
-      course: "CSE 316",
-      task: "Project Proposal",
-      postedDate: "Apr 24, 10:00 am",
-      dueDate: "Apr 29, 11:59 pm",
-      memo: "Write a team project proposal",
-    },
-    {
-      course: "CSE 316",
-      task: "Project Proposal",
-      postedDate: "Apr 24, 10:00 am",
-      dueDate: "Apr 29, 11:59 pm",
-      memo: "Write a team project proposal",
-    },
-    {
-      course: "CSE 316",
-      task: "Project Proposal",
-      postedDate: "Apr 24, 10:00 am",
-      dueDate: "Apr 29, 11:59 pm",
-      memo: "Write a team project proposal",
-    },
-    {
-      course: "CSE 316",
-      task: "Project Proposal",
-      postedDate: "Apr 24, 10:00 am",
-      dueDate: "Apr 29, 11:59 pm",
-      memo: "Write a team project proposal",
-    },
-  ]);
-  const handlePage = (e) => {
-    window.location.href = "edit_Todo/CSE316";
+  const [boxes, setBoxes] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/loadTodoList")
+      .then((res) => {
+        const newdata = res.data.map((data) => {
+          return {
+            user_id: data.user_id,
+            task: data.task,
+            course: data.course,
+            posted_date: data.posted_date,
+            due_date: data.due_date,
+            memo: data.memo,
+          };
+        });
+        setBoxes(newdata);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
+
+  const checkBox = () => {
+    console.log("debug", boxes);
   };
-  function Task({ course, task, postedDate, dueDate, memo, i }) {
-    console.log(i);
+
+  const handlePage = (e, i) => {
+    if (i == -1) {
+      let path = "edit_todo/@";
+      window.location.href = path;
+    } else {
+      let conv = boxes[i].user_id + "@" + boxes[i].task;
+      let path = "edit_todo/" + conv;
+      window.location.href = path;
+    }
+  };
+
+  const dateForm = (date) => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Dec",
+      "Nov",
+      "Dec",
+    ];
+    const [mm, dd, yy, h, m, ampm] = date.split("#");
+    const month = months[parseInt(mm) - 1 <= 12 ? parseInt(mm) - 1 : 0];
+    return [month, dd].join(" ") + ", " + [h, m].join(":") + ampm;
+  };
+  const boxForm = (data, i) => {
     return (
       <div className="task-display inline-block" key={i}>
         <input type="radio" name="finished" value="done" />
-        <div onClick={() => handlePage()} key={i} className="task">
+        <div onClick={(e) => handlePage(e, i)} key={i} className="task">
           <div>
-            <div className="course big-size">{course}</div>
-            <div className="task-name big-size task-color">{task}</div>
-            <div className="posted-date">{postedDate}</div>
-            <div className="due-date">{dueDate}</div>
+            <div className="course big-size">{data.course}</div>
+            <div className="task-name big-size task-color">{data.task}</div>
+            <div className="posted-date">{dateForm(data.posted_date)}</div>
+            <div className="due-date">{dateForm(data.due_date)}</div>
           </div>
-          <div className="memo">{memo}</div>
+          <div className="memo">{data.memo}</div>
         </div>
       </div>
     );
-  }
+  };
 
   return (
     <div className="flexible_body">
@@ -72,7 +87,7 @@ export default function Todo() {
         {/* <button className="margin_left navbutton">+ </button> */}
         <a
           className="button margin_left navbutton"
-          href="http://localhost:5173/edit_todo"
+          onClick={(e) => handlePage(e, -1)}
         >
           + Add Task
         </a>
@@ -84,18 +99,12 @@ export default function Todo() {
           <li className="posted-date">Posted Date</li>
           <li className="due-date">Due Date</li>
         </ul>
-        {Tasks.map((data, i) => (
-          <Task
-            key={i}
-            course={data.course}
-            task={data.task}
-            postedDate={data.postedDate}
-            dueDate={data.dueDate}
-            memo={data.memo}
-            i={i}
-          />
-        ))}
-        <button className="button done-button display-right">Done!</button>
+        {boxes.map((data, i) => {
+          return boxForm(data, i);
+        })}
+        <button className="button done-button display-right" onClick={checkBox}>
+          Done!
+        </button>
       </div>
     </div>
   );
