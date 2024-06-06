@@ -124,31 +124,40 @@ export default function CourseDetails() {
   const boxForm = (i, item, average, denom, percentage) => {
     return (
       <div className="itembox" key={i}>
-        <input
-          className="item-input"
-          value={item}
-          onChange={(e) => handleChange(e, i, 1)}
-        ></input>
-        <div className="item">
-          <span className="score">
-            <input value={average} onChange={(e) => handleChange(e, i, 2)} />
+        <div className="space-between">
+          <input
+            className="item-input"
+            value={item}
+            onChange={(e) => handleChange(e, i, 1)}
+          ></input>
+          <div className="dates flex margin-top-right">
+            <input
+              className="number-input"
+              value={average}
+              onChange={(e) => handleChange(e, i, 2)}
+            />
             {"/"}
-            <input value={denom} onChange={(e) => handleChange(e, i, 3)} />
-          </span>
-          <button className="delete-button" onClick={() => removeBox(i)}>
-            🗑️
-          </button>
-          <h4>
-            Percentage:{" "}
-            {
-              <input
-                value={percentage}
-                onChange={(e) => handleChange(e, i, 4)}
-              />
-            }{" "}
-            / 100
-          </h4>
+            <input
+              className="number-input"
+              value={denom}
+              onChange={(e) => handleChange(e, i, 3)}
+            />
+            <button className="trashcan" onClick={() => removeBox(i)}>
+              🗑️
+            </button>
+          </div>
         </div>
+        <h4 className="percentage">
+          Percentage:{" "}
+          {
+            <input
+              className="number-input"
+              value={percentage}
+              onChange={(e) => handleChange(e, i, 4)}
+            />
+          }{" "}
+          / 100
+        </h4>
       </div>
     );
   };

@@ -78,6 +78,7 @@ export default function CourseTable() {
     if (sum / 10 >= 9) letter = "A";
     else if (sum / 10 >= 8) letter = "B";
     else if (sum / 10 >= 7) letter = "C";
+    else if (sum / 10 >= 6) letter = "D";
     else letter = "F";
 
     if (sum % 10 >= 7 && letter !== "A" && letter !== "F") op = "+";
