@@ -5,16 +5,47 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function Details() {
-  const [course, setCourse] = useState("");
-  const [classroom, setRoom] = useState("B204");
-  const [professor, setProf] = useState("Aruna");
-  const [memo, setMemo] = useState("Computer Network");
-
+  const [course, setCourse] = useState();
+  const [classroom, setRoom] = useState("");
+  const [professor, setProf] = useState("");
+  const [memo, setMemo] = useState("");
   const { data } = useParams();
+
   useEffect(() => {
     const [_, newCourse] = data.split("@");
     setCourse(newCourse);
-  });
+    axios
+      .post("http://localhost:8000/loadCourseDetails", { newCourse })
+      .then((res) => {
+        const newdata = res.data[0];
+        setRoom(newdata.classroom);
+        setProf(newdata.professor);
+        setMemo(newdata.memo);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
+  function handleRoom(e) {
+    setRoom(e.target.value);
+  }
+  function handleProf(e) {
+    setProf(e.target.value);
+  }
+  function handleMemo(e) {
+    setMemo(e.target.value);
+  }
+
+  function handleSave() {
+    axios
+      .post("http://localhost:8000/updateGradeEval", newdata, {})
+      .then((response) => {})
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    alert("saved!");
+    window.location.href = "/gradeEval";
+  }
 
   return (
     <div className="flexible_body background_box edit_box">
@@ -31,13 +62,27 @@ export default function Details() {
         <input
           className="inputbox roomNo"
           defaultValue={classroom}
+          onChange={(e) => handleRoom(e)}
         ></input>{" "}
         <h4 className="inherit">Professor</h4>
-        <input className="inputbox" defaultValue={professor}></input>
+        <input
+          className="inputbox"
+          defaultValue={professor}
+          onChange={(e) => handleProf(e)}
+        ></input>
         <h4 className="inherit">Memo</h4>
-        <textarea className="memobox" defaultValue={memo}></textarea>
+        <textarea
+          className="memobox"
+          defaultValue={memo}
+          onChange={(e) => handleMemo(e)}
+        ></textarea>
         <div className="display-right">
-          <input className="button " type="submit" value={"Save"}></input>
+          <input
+            className="button "
+            type="submit"
+            value={"Save"}
+            onClick={() => handleSave()}
+          ></input>
         </div>
       </div>
     </div>

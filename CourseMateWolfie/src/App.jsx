@@ -28,7 +28,6 @@ function App() {
         <Route path="/edit_todo" element={<EditTodo />} />
         <Route path="/courseInfo" element={<CourseInfo />} />
         <Route path="/edit_courseInfo/:data" element={<EditCourseInfo />} />
-        <Route path="/edit_courseInfo" element={<EditCourseInfo />} />
       </Routes>
     </div>
   );

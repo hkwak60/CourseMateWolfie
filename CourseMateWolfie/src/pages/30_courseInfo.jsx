@@ -4,67 +4,72 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function CourseInfo() {
-  const [courses, setCourses] = useState([
-    {
-      user_id: "yo",
-      name: "CSE 310",
-      classroom: "B204",
-      professor: "Aruna",
-      memo: "Computer Network",
-    },
-    {
-      user_id: "0",
-      name: "CSE316",
-      classroom: "B203",
-      professor: "Mione",
-      memo: "Webpage Development",
-    },
-    {
-      user_id: "0",
-      name: "CSE320",
-      classroom: "B205",
-      professor: "Aruna",
-      memo: "Software Development",
-    },
-    {
-      user_id: "0",
-      name: "New Course",
-      classroom: "-",
-      professor: "-",
-      memo: "-",
-    },
-    {
-      user_id: "0",
-      name: "New Course",
-      classroom: "-",
-      professor: "-",
-      memo: "-",
-    },
-    {
-      user_id: "0",
-      name: "New Course",
-      classroom: "-",
-      professor: "-",
-      memo: "-",
-    },
-    {
-      user_id: "0",
-      name: "New Course",
-      classroom: "-",
-      professor: "-",
-      memo: "-",
-    },
-  ]);
+  const [boxes, setBoxes] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/loadGradeEval")
+      .then((res) => {
+        const newdata = res.data.map((data) => {
+          return {
+            user_id: data.user_id,
+            course: data.course,
+            classroom: data.classroom,
+            professor: data.professor,
+            memo: data.memo,
+          };
+        });
+        setBoxes(newdata);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
+
   const handlePage = (e, i) => {
+    console.log(boxes[i]);
     if (i == -1) {
       let path = "edit_courseInfo/@";
       window.location.href = path;
     } else {
-      let conv = courses[i].user_id + "@" + courses[i].name;
+      let conv = boxes[i].user_id + "@" + boxes[i].course;
       let path = "edit_courseInfo/" + conv;
       window.location.href = path;
     }
   };
+
+  function detailsBox(name, classroom, professor, memo, i) {
+    return (
+      <tr className="course_contents" key={i}>
+        <td scope="row" className="course_name1 ">
+          <div onClick={(e) => handlePage(e, i)} className="course_name">
+            {name}
+          </div>
+        </td>
+        <td className="course_room">
+          <div
+            onClick={(e) => handlePage(e, i)}
+            className="course_details padding_right"
+          >
+            {classroom}
+          </div>
+        </td>
+        <td className="course_prof">
+          <div onClick={(e) => handlePage(e, i)} className="course_details">
+            {professor}
+          </div>
+        </td>
+        <td className="course_memo">
+          <div onClick={(e) => handlePage(e, i)} className="course_details">
+            {memo}
+          </div>
+          {/* <div onClick={(e) => handlePage(e, i)} className="course_details">
+            {memo.length > 20 ? `${memo.substring(0, 20)}...` : memo}
+          </div> */}
+        </td>
+      </tr>
+    );
+  }
   return (
     <main className="flexible_body background_box">
       <table className="grade_display">
@@ -86,39 +91,15 @@ export default function CourseInfo() {
         </thead>
         {/* <div className="horizontal_line"></div> */}
         <tbody>
-          {courses.map((course, i) => (
-            <tr className="course_contents" key={i}>
-              <td scope="row" className="course_name1 ">
-                <div onClick={(e) => handlePage(e, i)} className="course_name">
-                  {course.name}
-                </div>
-              </td>
-              <td className="course_room">
-                <div
-                  onClick={(e) => handlePage(e, i)}
-                  className="course_details padding_right"
-                >
-                  {course.classroom}
-                </div>
-              </td>
-              <td className="course_prof">
-                <div
-                  onClick={(e) => handlePage(e, i)}
-                  className="course_details"
-                >
-                  {course.professor}
-                </div>
-              </td>
-              <td className="course_memo">
-                <div
-                  onClick={(e) => handlePage(e, i)}
-                  className="course_details"
-                >
-                  {course.memo}
-                </div>
-              </td>
-            </tr>
-          ))}
+          {boxes.map((data, i) =>
+            detailsBox(
+              data.course,
+              data.classroom,
+              data.professor,
+              data.memo,
+              i
+            )
+          )}
         </tbody>
       </table>
     </main>
