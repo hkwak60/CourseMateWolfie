@@ -73,7 +73,7 @@ export default function CourseInfo() {
   return (
     <main className="flexible_body background_box">
       <table className="grade_display">
-        <thead className="line">
+        <thead className="line ">
           <tr className="grade_header">
             <th className="course_name1" scope="col">
               Course Name

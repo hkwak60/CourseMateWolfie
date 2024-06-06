@@ -9,7 +9,6 @@ export default function CourseDetails() {
   const [course, setCourse] = useState("");
   const { data } = useParams();
   const [boxes, setBoxes] = useState([]);
-  const [SavedCourses, setSavedCourses] = useState();
 
   useEffect(() => {
     const [_, newCourse] = data.split("@");
@@ -39,14 +38,6 @@ export default function CourseDetails() {
       })
       .catch((e) => {
         console.error(e);
-      });
-    axios
-      .get("http://localhost:8000/getCourseNames")
-      .then((response) => {
-        setSavedCourses(response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
   }, []);
 
@@ -84,8 +75,6 @@ export default function CourseDetails() {
   const handleSave = (e) => {
     if (course.length === 0) {
       alert("Enter course name!");
-    } else if (SavedCourses.map((data) => data === course)) {
-      alert("Course Already Recorded!");
     } else if (boxes[0] === null || boxes[0] === undefined)
       alert("Add subject!");
     else {
