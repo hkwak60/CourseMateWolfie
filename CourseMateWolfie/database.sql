@@ -29,7 +29,7 @@ CREATE TABLE todo (
 	course nvarchar(30),
     task nvarchar(100),
     posted_date nvarchar(100),
-    due_data nvarchar(100),
+    due_date nvarchar(100),
     memo varchar(500)
 );
 
