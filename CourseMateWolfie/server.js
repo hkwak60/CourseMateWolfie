@@ -11,8 +11,8 @@ app.use(cors());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  // password: "chlgkstmd1",
-  password: "dufwlak123*",
+  password: "chlgkstmd1",
+  // password: "dufwlak123*",
   database: "project",
 });
 
@@ -134,6 +134,19 @@ app.post("/deleteGradeEval", (req, res) => {
     } else {
       console.log("course deleted successfully");
       res.status(200).send("course deleted successfully");
+    }
+  });
+});
+
+app.post("/deleteTodo", (req, res) => {
+  const delQuery = "DELETE FROM todo WHERE id = ? AND task = ?";
+  db.query(delQuery, req.body, (err, results) => {
+    if (err) {
+      console.error("Error deleting course: ", err);
+      res.status(500).send("Error deleting course");
+    } else {
+      console.log("task deleted successfully");
+      res.status(200).send("task deleted successfully");
     }
   });
 });

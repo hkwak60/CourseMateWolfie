@@ -18,10 +18,10 @@ CREATE TABLE course_eval (
     item nvarchar(200),
     average nvarchar(200),
     denom nvarchar(200),
-    percentage varchar(200),
-    classroom varchar(10),
-    professor varchar(50),
-    memo varchar(255)
+    percentage nvarchar(200),
+    classroom nvarchar(50),
+    professor nvarchar(100),
+    memo nvarchar(500))
 );
 
 TRUNCATE TABLE users;

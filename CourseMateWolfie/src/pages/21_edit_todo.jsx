@@ -3,14 +3,13 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function TodoDetails() {
-  // window.location.reload();
   const [postedDate, setPostedDate] = useState({
     mm: null,
     dd: null,
     yyyy: null,
     h: null,
     m: null,
-    ampm: null,
+    ampm: 1,
   });
   const [dueDate, setDueDate] = useState({
     mm: null,
@@ -18,17 +17,32 @@ export default function TodoDetails() {
     yyyy: null,
     h: null,
     m: null,
-    ampm: null,
+    ampm: 1,
   });
   const [id, setId] = useState(-1);
   const [task, setTask] = useState("");
   const [course, setcourse] = useState("");
   const [memo, setMemo] = useState("");
-  const [ampm1, setAmpm1] = useState(1);
-  const [ampm2, setAmpm2] = useState(1);
   const { data } = useParams();
+
   const [info, setInfo] = useState(["", "", "", "Course memo"]);
   // course, posted_date, due_date, memo
+
+  const setDate = (date, i) => {
+    const [mm, dd, yy, h, m, ampm] = date.split("#");
+    const func = i === 1 ? setPostedDate : setDueDate;
+    // const ampm_fun = i == 1 ? setAmpm1 : setAmpm2;
+    // ampm_fun(ampm);
+    func({
+      ...date,
+      mm: mm,
+      dd: dd,
+      yyyy: yy,
+      h: h,
+      m: m,
+      ampm: ampm === "am" ? 1 : 2,
+    });
+  };
 
   useEffect(() => {
     const [_, newTask] = data.split("@");
@@ -50,6 +64,7 @@ export default function TodoDetails() {
         setInfo(newdata);
         setcourse(loaded.course);
         setMemo(loaded.memo);
+
         setDate(loaded.posted_date, 1);
         setDate(loaded.due_date, 2);
       })
@@ -69,25 +84,6 @@ export default function TodoDetails() {
     }
     setInfo(newdata);
   };
-  const handleAmpm = (e, i) => {
-    const func = i === 1 ? setPostedDate : setDueDate;
-    const ap = e.target.value == "am" ? 1 : 2;
-    func({ ...date, ampm: ap });
-  };
-
-  const setDate = (date, i) => {
-    const [mm, dd, yy, h, m, ampm] = date.split("#");
-    const func = i === 1 ? setPostedDate : setDueDate;
-    func({
-      ...date,
-      mm: mm,
-      dd: dd,
-      yyyy: yy,
-      h: h,
-      m: m,
-      ampm: ampm === "am" ? 1 : 2,
-    });
-  };
 
   const comb = (data) => {
     const ampm = data.ampm === 1 ? "am" : "pm";
@@ -104,20 +100,7 @@ export default function TodoDetails() {
     if (info[0].length === 0) alert("Enter course name!");
     else if (task.length === 0) alert("Enter a task!");
     else if (info[3].length === 0) alert("Enter a memo!");
-    else if (
-      lenzero(mm1) ||
-      lenzero(dd1) ||
-      lenzero(yy1) ||
-      lenzero(h1) ||
-      lenzero(m1) ||
-      lenzero(mm2) ||
-      lenzero(dd2) ||
-      lenzero(yy2) ||
-      lenzero(h2) ||
-      lenzero(m2)
-    ) {
-      alert("Enter date and time!");
-    } else {
+    else {
       const posted_comb = comb(postedDate);
       const due_comb = comb(dueDate);
       console.log("date1:", posted_comb);
@@ -179,15 +162,6 @@ export default function TodoDetails() {
           onChange={(e) => func({ ...date, m: e.target.value })}
           placeholder="mm"
         />
-        <select
-          defaultValue={date.ampm == 1 ? "am" : "pm"}
-          id="time"
-          name="timeperiod"
-          onChange={(e) => handleAmpm(e, i)}
-        >
-          <option value="am">AM</option>
-          <option value="pm">PM</option>
-        </select>
       </div>
     );
   };

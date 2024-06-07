@@ -4,6 +4,7 @@ import axios from "axios";
 
 export default function Todo() {
   const [boxes, setBoxes] = useState([]);
+  const [idx, setIdx] = useState(-1);
   useEffect(() => {
     axios
       .get("http://localhost:8000/loadTodoList")
@@ -24,10 +25,6 @@ export default function Todo() {
         console.error(e);
       });
   }, []);
-
-  const checkBox = () => {
-    console.log("debug", boxes);
-  };
 
   const handlePage = (e, i) => {
     if (i == -1) {
@@ -57,12 +54,33 @@ export default function Todo() {
     ];
     const [mm, dd, yy, h, m, ampm] = date.split("#");
     const month = months[parseInt(mm) - 1 <= 12 ? parseInt(mm) - 1 : 0];
-    return [month, dd].join(" ") + ", " + [h, m].join(":") + ampm;
+    return [month, dd].join(" ") + ", " + [h, m].join(":");
+  };
+  const handleRemove = () => {
+    const newdata = [...boxes];
+    const toRmv = newdata[idx];
+    axios
+      .post("http://localhost:8000/deleteTodo", [toRmv.user_id, toRmv.task])
+      .then((res) => {})
+      .catch((e) => {
+        console.error(e);
+      });
+    newdata.splice(idx, 1);
+    setBoxes(newdata);
+    alert("Task done!");
+  };
+  const trackRadio = (i) => {
+    setIdx(i);
   };
   const boxForm = (data, i) => {
     return (
       <div className="task-display inline-block" key={i}>
-        <input type="radio" name="finished" value="done" />
+        <input
+          type="radio"
+          name="finished"
+          value="done"
+          onClick={() => trackRadio(i)}
+        />
         <div onClick={(e) => handlePage(e, i)} key={i} className="task">
           <div>
             <div className="course big-size">{data.course}</div>
@@ -79,12 +97,6 @@ export default function Todo() {
   return (
     <div className="flexible_body">
       <div className="align align_right">
-        <p>Order: </p>
-        <select id="sort" name="sorting">
-          <option value="postedDate">Posted Date</option>
-          <option value="dueDate">Due Date</option>
-        </select>
-        {/* <button className="margin_left navbutton">+ </button> */}
         <a
           className="button margin_left navbutton"
           onClick={(e) => handlePage(e, -1)}
@@ -102,7 +114,10 @@ export default function Todo() {
         {boxes.map((data, i) => {
           return boxForm(data, i);
         })}
-        <button className="button done-button display-right" onClick={checkBox}>
+        <button
+          className="button done-button display-right"
+          onClick={() => handleRemove()}
+        >
           Done!
         </button>
       </div>
