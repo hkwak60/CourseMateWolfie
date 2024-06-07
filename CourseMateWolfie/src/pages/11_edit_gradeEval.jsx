@@ -47,9 +47,9 @@ export default function CourseDetails() {
       ...boxes,
       {
         item: "ITEM",
-        average: 0,
-        denom: 1,
-        percentage: 0,
+        average: 100,
+        denom: 100,
+        percentage: 100,
       },
     ];
     setBoxes(newdata);
@@ -63,7 +63,7 @@ export default function CourseDetails() {
   const handleDelete = (course) => {
     console.log(course);
     axios
-      .post("http://localhost:8000/deleteGradeEval", [course])
+      .post("http://localhost:8000/deleteGradeEval", [id, course])
       .then((response) => {})
       .catch((error) => {
         console.error("Error:", error);
@@ -76,7 +76,7 @@ export default function CourseDetails() {
     if (course.length === 0) {
       alert("Enter course name!");
     } else if (boxes[0] === null || boxes[0] === undefined)
-      alert("Add subject!");
+      alert("Add at least 1 item!");
     else {
       let comb_item = "" + boxes[0].item;
       let comb_avg = "" + boxes[0].average;
@@ -99,6 +99,7 @@ export default function CourseDetails() {
         denom: comb_den,
         percentage: comb_per,
       };
+      console.log(newdata);
       axios
         .post("http://localhost:8000/updateGradeEval", newdata, {})
         .then((response) => {})

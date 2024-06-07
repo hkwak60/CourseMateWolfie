@@ -90,9 +90,10 @@ app.post("/loadCourse", (req, res) => {
   });
 });
 
-app.get("/loadGradeEval", (req, res) => {
-  const query = "SELECT * FROM course_eval";
-  db.query(query, (err, results) => {
+app.post("/loadGradeEval", (req, res) => {
+  const id = req.body[0];
+  const query = "SELECT * FROM course_eval WHERE user_id = ?";
+  db.query(query, id, (err, results) => {
     return res.send(results);
   });
 });
@@ -110,9 +111,8 @@ app.post("/updateGradeEval", (req, res) => {
     infos.denom,
     infos.percentage,
   ];
-
-  const delQuery = "DELETE FROM course_eval WHERE course = (?)";
-  db.query(delQuery, infos.course, (err, results) => {});
+  const delQuery = "DELETE FROM course_eval WHERE user_id = ? AND course = ?";
+  db.query(delQuery, [infos.user_id, infos.course], (err, results) => {});
 
   db.query(sqlQuery, [value], (err, result) => {
     if (err) {
@@ -126,7 +126,7 @@ app.post("/updateGradeEval", (req, res) => {
 });
 
 app.post("/deleteGradeEval", (req, res) => {
-  const delQuery = "DELETE FROM course_eval WHERE course = ?";
+  const delQuery = "DELETE FROM course_eval WHERE user_id = ? AND course = ?";
   db.query(delQuery, req.body, (err, results) => {
     if (err) {
       console.error("Error deleting course: ", err);
@@ -139,7 +139,7 @@ app.post("/deleteGradeEval", (req, res) => {
 });
 
 app.post("/deleteTodo", (req, res) => {
-  const delQuery = "DELETE FROM todo WHERE id = ? AND task = ?";
+  const delQuery = "DELETE FROM todo WHERE user_id = ? AND task = ?";
   db.query(delQuery, req.body, (err, results) => {
     if (err) {
       console.error("Error deleting course: ", err);
@@ -151,9 +151,10 @@ app.post("/deleteTodo", (req, res) => {
   });
 });
 
-app.get("/loadTodoList", (req, res) => {
-  const query = "SELECT * FROM todo";
-  db.query(query, (err, results) => {
+app.post("/loadTodoList", (req, res) => {
+  const id = req.body[0];
+  const query = "SELECT * FROM todo WHERE user_id = ?";
+  db.query(query, id, (err, results) => {
     return res.send(results);
   });
 });

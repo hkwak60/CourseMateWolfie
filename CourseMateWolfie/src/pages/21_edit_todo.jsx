@@ -31,8 +31,6 @@ export default function TodoDetails() {
   const setDate = (date, i) => {
     const [mm, dd, yy, h, m, ampm] = date.split("#");
     const func = i === 1 ? setPostedDate : setDueDate;
-    // const ampm_fun = i == 1 ? setAmpm1 : setAmpm2;
-    // ampm_fun(ampm);
     func({
       ...date,
       mm: mm,
@@ -199,13 +197,9 @@ export default function TodoDetails() {
           onChange={(e) => handleChange(e.target.value, 2)}
         />
         <div className="buttons_display">
+          <div></div>
           <input
-            className="deletebutton"
-            type="submit"
-            value={"Delete this task"}
-          ></input>
-          <input
-            className="button"
+            className="button display-right1"
             type="submit"
             value={"Save"}
             onClick={() => handleSave()}

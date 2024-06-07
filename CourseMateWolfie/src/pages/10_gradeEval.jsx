@@ -7,7 +7,12 @@ export default function CourseTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/loadGradeEval")
+      .get("http://localhost:8000/loadOnline")
+      .then((res) => {
+        return axios.post("http://localhost:8000/loadGradeEval", [
+          res.data[0].user_id,
+        ]);
+      })
       .then((res) => {
         const newdata = res.data.map((data) => {
           return {

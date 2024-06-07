@@ -7,7 +7,12 @@ export default function Todo() {
   const [idx, setIdx] = useState(-1);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/loadTodoList")
+      .get("http://localhost:8000/loadOnline")
+      .then((res) => {
+        return axios.post("http://localhost:8000/loadTodoList", [
+          res.data[0].user_id,
+        ]);
+      })
       .then((res) => {
         const newdata = res.data.map((data) => {
           return {
