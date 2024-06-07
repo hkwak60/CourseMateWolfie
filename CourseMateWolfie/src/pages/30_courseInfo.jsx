@@ -6,6 +6,7 @@ export default function CourseInfo() {
   const [boxes, setBoxes] = useState([]);
 
   useEffect(() => {
+    // Call course lists only belong to current user id
     axios
       .get("http://localhost:8000/loadOnline")
       .then((res) => {

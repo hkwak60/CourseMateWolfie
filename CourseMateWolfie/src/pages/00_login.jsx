@@ -16,6 +16,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     let idx = -1;
+    // Check dupulicated id, wrong id or password
     userData.forEach((data, i) => {
       if (data.user_name === nameInput) idx = i;
     });
@@ -27,7 +28,7 @@ export default function Login() {
           user_name: nameInput,
           user_password: pwInput,
         };
-        axios
+        axios //Update online user currently using the website
           .post("http://localhost:8000/updateOnline", idpw, {})
           .then((response) => {})
           .catch((error) => {

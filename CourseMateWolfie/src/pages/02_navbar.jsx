@@ -24,7 +24,7 @@ export default function Navbar() {
   const handleLogout = (e) => {
     window.location.href = "/login";
   };
-
+  // Dynamically tagged for nav-active page
   return (
     <>
       <div className="logout">

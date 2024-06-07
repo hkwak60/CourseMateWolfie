@@ -6,6 +6,7 @@ export default function CourseTable() {
   const [boxes, setBoxes] = useState([]);
 
   useEffect(() => {
+    // Call grade lists only belong to current user id
     axios
       .get("http://localhost:8000/loadOnline")
       .then((res) => {
@@ -31,6 +32,7 @@ export default function CourseTable() {
       });
   }, []);
 
+  // Pass data of user id and course name to edit page
   const handlePage = (e, i) => {
     if (i == -1) {
       let path = "edit_gradeEval/@";
@@ -50,6 +52,7 @@ export default function CourseTable() {
     percentages.forEach((data) => {
       perc_sum += parseFloat(data);
     });
+    // Calculate final score based on items' percentage
     let sum = 0;
     averages.forEach((data, i) => {
       let avg = parseFloat(data);
@@ -57,6 +60,7 @@ export default function CourseTable() {
       let per = parseFloat(percentages[i]);
       sum += (avg / den) * 100 * (per / perc_sum);
     });
+    // Letter grade calculation algorithm
     let letter = "";
     let op = "";
     if (sum / 10 >= 9) letter = "A";

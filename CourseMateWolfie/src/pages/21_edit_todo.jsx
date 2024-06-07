@@ -7,16 +7,16 @@ export default function TodoDetails() {
     mm: null,
     dd: null,
     yyyy: null,
-    h: null,
-    m: null,
+    h: 12,
+    m: 0,
     ampm: 1,
   });
   const [dueDate, setDueDate] = useState({
     mm: null,
     dd: null,
     yyyy: null,
-    h: null,
-    m: null,
+    h: 12,
+    m: 0,
     ampm: 1,
   });
   const [id, setId] = useState(-1);
@@ -28,6 +28,7 @@ export default function TodoDetails() {
   const [info, setInfo] = useState(["", "", "", "Course memo"]);
   // course, posted_date, due_date, memo
 
+  // i for handle several cases
   const setDate = (date, i) => {
     const [mm, dd, yy, h, m, ampm] = date.split("#");
     const func = i === 1 ? setPostedDate : setDueDate;
@@ -43,6 +44,7 @@ export default function TodoDetails() {
   };
 
   useEffect(() => {
+    // Receive data of user id and task name from previous page
     const [_, newTask] = data.split("@");
     setTask(newTask);
     axios.get("http://localhost:8000/loadOnline").then((res) => {
@@ -71,6 +73,7 @@ export default function TodoDetails() {
       });
   }, []);
 
+  // i for handle several cases
   const handleChange = (onChangeValue, i) => {
     const val = onChangeValue;
     let newdata = [...info];
@@ -115,42 +118,53 @@ export default function TodoDetails() {
       window.location.href = "/todo";
     }
   };
+  function validateNumberInput(input) {
+    input.target.value = input.target.value.replace(/[^0-9]/g, "");
+  }
+
+  // i for handle several cases
   const dateInput = (date, i) => {
     const func = i === 1 ? setPostedDate : setDueDate;
     return (
       <div className="dateInput">
         <div className="dates">
           <input
-            type="number"
+            type="text"
             defaultValue={date.mm}
+            onInput={(e) => validateNumberInput(e)}
             onChange={(e) => func({ ...date, mm: e.target.value })}
             placeholder="MM"
           />
           /
           <input
-            type="number"
+            type="text"
             defaultValue={date.dd}
+            onInput={(e) => validateNumberInput(e)}
             onChange={(e) => func({ ...date, dd: e.target.value })}
             placeholder="DD"
           />
           /
           <input
-            type="number"
+            type="text"
             defaultValue={date.yyyy}
+            onInput={(e) => validateNumberInput(e)}
+            oninput="validateNumberInput(this)"
             onChange={(e) => func({ ...date, yyyy: e.target.value })}
             placeholder="YYYY"
           />
         </div>
         <input
-          type="number"
+          type="text"
           defaultValue={date.h}
+          onInput={(e) => validateNumberInput(e)}
           onChange={(e) => func({ ...date, h: e.target.value })}
           placeholder="hh"
         />
         {":"}
         <input
-          type="number"
+          type="text"
           defaultValue={date.m}
+          onInput={(e) => validateNumberInput(e)}
           onChange={(e) => func({ ...date, m: e.target.value })}
           placeholder="mm"
         />

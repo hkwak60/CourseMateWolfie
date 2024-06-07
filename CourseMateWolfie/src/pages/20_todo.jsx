@@ -6,6 +6,7 @@ export default function Todo() {
   const [boxes, setBoxes] = useState([]);
   const [idx, setIdx] = useState(-1);
   useEffect(() => {
+    // Call todo lists only belong to current user id
     axios
       .get("http://localhost:8000/loadOnline")
       .then((res) => {
@@ -31,6 +32,7 @@ export default function Todo() {
       });
   }, []);
 
+  // Pass data of user id and task name to edit page
   const handlePage = (e, i) => {
     if (i == -1) {
       let path = "edit_todo/@";
@@ -57,9 +59,22 @@ export default function Todo() {
       "Nov",
       "Dec",
     ];
-    const [mm, dd, yy, h, m, ampm] = date.split("#");
-    const month = months[parseInt(mm) - 1 <= 12 ? parseInt(mm) - 1 : 0];
-    return [month, dd].join(" ") + ", " + [h, m].join(":");
+    // Make the format clear considering null value
+    const [mm, dd, yyyy, h, m, ampm] = date.split("#");
+    const month =
+      months[
+        parseInt(mm) - 1 <= 12 ? parseInt(mm) - 1 : Math.abs(parseInt(mm) % 12)
+      ];
+    const ff = isnull(h) || isnull(m) ? "" : [month, dd].join(" ");
+    const ss =
+      isnull(h) || isnull(m) ? "" : [digitMod(h), digitMod(m)].join(":");
+    return ff.length === 0 ? ss : ss.length === 0 ? ff : ff + ", " + ss;
+  };
+  const digitMod = (val) => {
+    return val.length === 1 ? "0" + val : val;
+  };
+  const isnull = (val) => {
+    return val.length === 0 || val === null || val === undefined;
   };
   const handleRemove = () => {
     const newdata = [...boxes];

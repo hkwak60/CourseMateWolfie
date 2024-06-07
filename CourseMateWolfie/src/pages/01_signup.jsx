@@ -29,11 +29,13 @@ export default function SignUp() {
   };
   const handleSave = (e) => {
     e.preventDefault();
+    // Handle blank user name or password input
     if (name.length === 0) {
       alert("Enter an user name!");
     } else if (password.length < 4) {
       alert("Use password of at least 4 characters!");
     } else {
+      // idx is -1 for new user, if not, then user of such name already exists
       let idx = -1;
       userData.forEach((data, i) => {
         if (data.user_name === name) idx = i;

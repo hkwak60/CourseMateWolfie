@@ -5,6 +5,7 @@ export default function ShowNavbar({ children }) {
   const location = useLocation();
   const [showNav, setShowNav] = useState(false);
 
+  // Hide navbar for th e login page
   useEffect(() => {
     if (
       location.pathname == "/" ||

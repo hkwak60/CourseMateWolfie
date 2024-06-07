@@ -169,7 +169,6 @@ app.post("/loadTodo", (req, res) => {
 
 app.post("/updateTodo", (req, res) => {
   const infos = req.body;
-  console.log(infos);
 
   const sqlQuery =
     "INSERT INTO todo (user_id, course, task, posted_date, due_date, memo) VALUES (?)";

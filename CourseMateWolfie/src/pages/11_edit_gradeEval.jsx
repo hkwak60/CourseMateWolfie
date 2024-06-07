@@ -11,6 +11,7 @@ export default function CourseDetails() {
   const [boxes, setBoxes] = useState([]);
 
   useEffect(() => {
+    // Receive data of user id and course name from previous page
     const [_, newCourse] = data.split("@");
     setCourse(newCourse);
     axios.get("http://localhost:8000/loadOnline").then((res) => {
@@ -97,6 +98,7 @@ export default function CourseDetails() {
         denom: comb_den,
         percentage: comb_per,
       };
+      // Replace the old data to the new one
       axios
         .post("http://localhost:8000/updateGradeEval", newdata, {})
         .then((response) => {})
@@ -108,6 +110,7 @@ export default function CourseDetails() {
     }
   };
 
+  // i for handle several cases
   const handleChange = (onChangeValue, i, change) => {
     const newdata = [...boxes];
     if (change === 1) newdata[i].item = onChangeValue.target.value;
