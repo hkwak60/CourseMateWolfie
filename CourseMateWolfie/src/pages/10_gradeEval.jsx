@@ -88,8 +88,8 @@ export default function CourseTable() {
   return (
     <main className="background_box flexible_body">
       <table className="grade_display">
-        <thead className="line">
-          <tr className="grade_header">
+        <thead>
+          <tr className="grade_header line">
             <th className="course_name" scope="col">
               Course Name
             </th>

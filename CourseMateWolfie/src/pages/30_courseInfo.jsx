@@ -41,8 +41,8 @@ export default function CourseInfo() {
   function detailsBox(name, classroom, professor, memo, i) {
     return (
       <tr className="course_contents" key={i}>
-        <td scope="row" className="course_name1 ">
-          <div onClick={(e) => handlePage(e, i)} className="course_name">
+        <td scope="row" className="course_name1">
+          <div onClick={(e) => handlePage(e, i)} className="course_name1">
             {name}
           </div>
         </td>
@@ -73,8 +73,8 @@ export default function CourseInfo() {
   return (
     <main className="flexible_body background_box">
       <table className="grade_display">
-        <thead className="line ">
-          <tr className="grade_header">
+        <thead>
+          <tr className="grade_header line">
             <th className="course_name1" scope="col">
               Course Name
             </th>
