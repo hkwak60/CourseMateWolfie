@@ -403,6 +403,12 @@ tbody .course_name1 {
   text-align: left;
   padding: 10px;
 }
+.memo {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  background-color: var(--lightactiveColor);
+}
 /* ____________________Reusable_____________________________________________________________ */
 .flexible_body {
   max-width: 800px;

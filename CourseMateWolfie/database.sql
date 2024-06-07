@@ -24,6 +24,15 @@ CREATE TABLE course_eval (
     memo nvarchar(500))
 );
 
+CREATE TABLE todo (
+	user_id int,
+	course nvarchar(30),
+    task nvarchar(100),
+    posted_date nvarchar(100),
+    due_data nvarchar(100),
+    memo varchar(500)
+);
+
 TRUNCATE TABLE users;
 SELECT * FROM users;
 SELECT * FROM online_user;

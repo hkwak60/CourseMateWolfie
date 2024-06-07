@@ -60,12 +60,15 @@ export default function Todo() {
       "Dec",
     ];
     // Make the format clear considering null value
-    const [mm, dd, yyyy, h, m, ampm] = date.split("#");
+    const [mm, dd, yyyy, hhh, mmm, ampm] = date.split("#");
     const month =
       months[
         parseInt(mm) - 1 <= 12 ? parseInt(mm) - 1 : Math.abs(parseInt(mm) % 12)
       ];
-    const ff = isnull(h) || isnull(m) ? "" : [month, dd].join(" ");
+    const day = parseInt(dd) % 32;
+    const h = "" + (parseInt(hhh) % 25);
+    const m = "" + (parseInt(mmm) % 61);
+    const ff = isnull(h) || isnull(m) ? "" : [month, day].join(" ");
     const ss =
       isnull(h) || isnull(m) ? "" : [digitMod(h), digitMod(m)].join(":");
     return ff.length === 0 ? ss : ss.length === 0 ? ff : ff + ", " + ss;
@@ -108,7 +111,9 @@ export default function Todo() {
             <div className="posted-date">{dateForm(data.posted_date)}</div>
             <div className="due-date">{dateForm(data.due_date)}</div>
           </div>
-          <div className="memo">{data.memo}</div>
+        </div>
+        <div className="memo" onClick={(e) => handlePage(e, i)}>
+          {data.memo}
         </div>
       </div>
     );
