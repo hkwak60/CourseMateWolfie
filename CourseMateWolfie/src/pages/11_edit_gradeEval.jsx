@@ -42,7 +42,6 @@ export default function CourseDetails() {
   }, []);
 
   const addBox = () => {
-    // console.log("Add Boxes", boxes);
     const newdata = [
       ...boxes,
       {
@@ -61,7 +60,6 @@ export default function CourseDetails() {
   };
 
   const handleDelete = (course) => {
-    console.log(course);
     axios
       .post("http://localhost:8000/deleteGradeEval", [id, course])
       .then((response) => {})
@@ -99,7 +97,6 @@ export default function CourseDetails() {
         denom: comb_den,
         percentage: comb_per,
       };
-      console.log(newdata);
       axios
         .post("http://localhost:8000/updateGradeEval", newdata, {})
         .then((response) => {})

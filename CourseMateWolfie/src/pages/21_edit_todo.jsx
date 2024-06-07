@@ -87,10 +87,6 @@ export default function TodoDetails() {
     const ampm = data.ampm === 1 ? "am" : "pm";
     return [data.mm, data.dd, data.yyyy, data.h, data.m, ampm].join("#");
   };
-
-  const lenzero = (str) => {
-    return str.length === 0;
-  };
   const handleSave = (e) => {
     const [mm1, dd1, yy1, h1, m1, ampm1] = info[1].split("#");
     const [mm2, dd2, yy2, h2, m2, ampm2] = info[2].split("#");
@@ -101,7 +97,6 @@ export default function TodoDetails() {
     else {
       const posted_comb = comb(postedDate);
       const due_comb = comb(dueDate);
-      console.log("date1:", posted_comb);
       const newdata = {
         user_id: id,
         task: task,
@@ -110,7 +105,6 @@ export default function TodoDetails() {
         due_date: due_comb,
         memo: info[3],
       };
-      console.log("debug info", info);
       axios
         .post("http://localhost:8000/updateTodo", newdata)
         .then((response) => {})

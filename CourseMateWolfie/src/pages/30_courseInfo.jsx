@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -32,7 +31,6 @@ export default function CourseInfo() {
   }, []);
 
   const handlePage = (e, i) => {
-    console.log(boxes[i]);
     if (i == -1) {
       let path = "edit_courseInfo/@";
       window.location.href = path;
@@ -68,9 +66,6 @@ export default function CourseInfo() {
           <div onClick={(e) => handlePage(e, i)} className="course_details">
             {memo}
           </div>
-          {/* <div onClick={(e) => handlePage(e, i)} className="course_details">
-            {memo.length > 20 ? `${memo.substring(0, 20)}...` : memo}
-          </div> */}
         </td>
       </tr>
     );
@@ -94,7 +89,6 @@ export default function CourseInfo() {
             </th>
           </tr>
         </thead>
-        {/* <div className="horizontal_line"></div> */}
         <tbody>
           {boxes.map((data, i) =>
             detailsBox(

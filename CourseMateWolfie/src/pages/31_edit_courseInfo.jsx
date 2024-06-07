@@ -46,7 +46,6 @@ export default function Details() {
       professor: professor,
       memo: memo,
     };
-    console.log(details);
     axios
       .post("http://localhost:8000/updateCourseDetails", details, {})
       .then((response) => {})
