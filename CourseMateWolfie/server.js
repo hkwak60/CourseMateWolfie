@@ -2,7 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const bodyparser = require("body-parser");
 const cors = require("cors");
-const port = process.env.port || 8000;
+const port = process.env.PORT || 8000;
 
 const app = express();
 app.use(bodyparser.json());
@@ -14,6 +14,14 @@ const db = mysql.createConnection({
   // password: "chlgkstmd1",
   password: "dufwlak123*",
   database: "project",
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error("MySQL connection error:", err);
+    process.exit(1);
+  }
+  console.log("MySQL connected!");
 });
 
 app.get("/", (req, res) => {

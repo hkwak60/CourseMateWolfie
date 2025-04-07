@@ -21,7 +21,7 @@ CREATE TABLE course_eval (
     percentage nvarchar(200),
     classroom nvarchar(50),
     professor nvarchar(100),
-    memo nvarchar(500))
+    memo nvarchar(500)
 );
 
 CREATE TABLE todo (
